@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 
 LocationSearch.propTypes = {
   locationCity: PropTypes.string.isRequired,
-  setOptions: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 function LocationSearch(props) {
-  const {locationCity, setOptions} = props;
+  const {locationCity, onChange} = props;
   const [query, setQuery] = useState(locationCity);
   console.log('LocationSearch');
   return (
@@ -21,7 +21,7 @@ function LocationSearch(props) {
       <Button
         onPress={() => {
           console.log(`press ${locationCity}`);
-          setOptions({q: query});
+          onChange(query);
         }}
         title="Search"
         color="#841584"

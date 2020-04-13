@@ -10,9 +10,9 @@ LocationData.propTypes = {
 function LocationData(props) {
   const {
     locationCity,
-    onUpdate
+    onUpdate,
   } = props;
-  console.log('LocationData');
+  console.log('LocationData')
 
   return (
     <View>
