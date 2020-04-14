@@ -23,7 +23,7 @@ const useGeolocation = callback => {
       isLoading: false,
       isError: false,
       coors: null,
-      updateGeolocation: false,
+      updateGeolocation: true,
     },
   );
 
@@ -32,6 +32,7 @@ const useGeolocation = callback => {
 
   useEffect(() => {
     console.log('useGeolocation useEffect');
+    console.log(stateGeolocation);
     let watchId = null;
     async function fetchGeolocation() {
       dispatchGeolocation({type: `${GEOLOCATION}${START}`});
@@ -41,6 +42,7 @@ const useGeolocation = callback => {
       watchId = await Geolocation.watchPosition(
         pos => {
           console.log('watch!!');
+          //let payload =
           dispatchGeolocation({
             type: `${GEOLOCATION}${SUCCESS}`,
             payload: {
@@ -50,7 +52,8 @@ const useGeolocation = callback => {
           });
 
           if (typeof callback === 'function') {
-            callback();
+            console.dir(callback)
+            callback(pos.coords);
           }
         },
         e => {
@@ -61,6 +64,10 @@ const useGeolocation = callback => {
       );
     }
     fetchGeolocation();
+      // .then( () => {
+      //   console.log('THEN');
+      //   console.log(stateGeolocation);
+      // });
 
     return () => Geolocation.clearWatch(watchId);
   }, [stateGeolocation.updateGeolocation]);
@@ -128,8 +135,11 @@ const useDataApi = () => {
 };
 
 function Location(props) {
-  console.log('Location!');
-  const setCoorsOptions = () => {
+  console.log('Location!?');
+  const setCoorsOptions = (coors) => {
+    console.log('setCoorsOptions');
+    console.log(stateGeolocation);
+    console.log(coors);
     dispatchData({
       type: `${FETCH}${SET_OPTIONS}`,
       payload: stateGeolocation.coors,
@@ -143,7 +153,8 @@ function Location(props) {
   };
   const [stateGeolocation, dispatchGeolocation] = useGeolocation(setCoorsOptions);
   const [stateData, dispatchData] = useDataApi();
-
+  console.log('end locvation stateGeolocation');
+  console.log(stateGeolocation);
   return (
     <View>
       {stateGeolocation.isLoading || stateData.isLoading || !stateData.city ? (
