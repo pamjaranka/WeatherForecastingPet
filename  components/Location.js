@@ -1,145 +1,21 @@
-import React, {useState, useEffect, useReducer} from 'react';
+import React from 'react';
 import {Text, View} from 'react-native';
 import LocationData from './LocationData';
 import LocationSearch from './LocationSearch';
-import Geolocation from '@react-native-community/geolocation';
-import axios from 'axios';
+import useGeolocation from '../hooks/useGeolocation';
+import useDataApi from '../hooks/useDataApi';
 import {
-  START,
-  SUCCESS,
-  FAIL,
   UPDATE,
   FETCH,
   SET_OPTIONS,
   GEOLOCATION,
 } from '../constants';
-import dataFetchReducer from '../reducer/data';
-import geolocationReducer from '../reducer/geolocation';
 
-const useGeolocation = callback => {
-  const [stateGeolocation, dispatchGeolocation] = useReducer(
-    geolocationReducer,
-    {
-      isLoading: false,
-      isError: false,
-      coors: null,
-      updateGeolocation: true,
-    },
-  );
-
-  console.log('useGeolocation (stateGeolocation)');
-  console.log(stateGeolocation);
-
-  useEffect(() => {
-    console.log('useGeolocation useEffect');
-    console.log(stateGeolocation);
-    let watchId = null;
-    async function fetchGeolocation() {
-      dispatchGeolocation({type: `${GEOLOCATION}${START}`});
-
-      console.log('fetchGeolocation');
-
-      watchId = await Geolocation.watchPosition(
-        pos => {
-          console.log('watch!!');
-          //let payload =
-          dispatchGeolocation({
-            type: `${GEOLOCATION}${SUCCESS}`,
-            payload: {
-              lat: pos.coords.latitude,
-              lon: pos.coords.longitude,
-            },
-          });
-
-          if (typeof callback === 'function') {
-            console.dir(callback)
-            callback(pos.coords);
-          }
-        },
-        e => {
-          console.log(e);
-          dispatchGeolocation({type: `${GEOLOCATION}${FAIL}`});
-        },
-        {maximumAge: 0},
-      );
-    }
-    fetchGeolocation();
-      // .then( () => {
-      //   console.log('THEN');
-      //   console.log(stateGeolocation);
-      // });
-
-    return () => Geolocation.clearWatch(watchId);
-  }, [stateGeolocation.updateGeolocation]);
-
-  return [stateGeolocation, dispatchGeolocation];
-};
-
-const useDataApi = () => {
-  const [stateData, dispatchData] = useReducer(dataFetchReducer, {
-    isLoading: false,
-    isError: false,
-    options: null,
-    data: null,
-    city: null,
-  });
-
-  console.log('useDataApi (stateData)');
-  console.log(stateData);
-
-  let url = 'https://api.openweathermap.org/data/2.5/find?';
-  let apiOption = {
-    cnt: 10,
-    units: 'metric',
-    appid: 'c85e37b1b752a38ed49c404c510ed21a',
-    ...stateData.options,
-  };
-
-  let flag = 0;
-  for (let key in apiOption) {
-    flag++;
-    url += `${key}=${apiOption[key]}`;
-    url += flag < Object.keys(apiOption).length ? '&' : '';
-  }
-
-  console.log(url);
-
-  useEffect(() => {
-    let didCancel = false;
-    console.log(`did cancel ${didCancel}`);
-    if (stateData.options) {
-      dispatchData({type: `${FETCH}${START}`});
-      const fetchData = async () => {
-        try {
-          const result = await axios(url);
-          console.log('try');
-          if (result && result.data) {
-            dispatchData({
-              type: `${FETCH}${SUCCESS}`,
-              payload: result.data.list,
-            });
-          }
-        } catch (e) {
-          console.log(e.message);
-          dispatchData({type: `${FETCH}${FAIL}`});
-        }
-      };
-      fetchData();
-    }
-    return () => {
-      didCancel = true;
-    };
-  }, [stateData.options, url]);
-
-  return [stateData, dispatchData];
-};
-
-function Location(props) {
+function Location() {
   console.log('Location!?');
-  const setCoorsOptions = (coors) => {
+  const setCoorsOptions = () => {
     console.log('setCoorsOptions');
     console.log(stateGeolocation);
-    console.log(coors);
     dispatchData({
       type: `${FETCH}${SET_OPTIONS}`,
       payload: stateGeolocation.coors,
