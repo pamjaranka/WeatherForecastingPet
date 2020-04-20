@@ -7,7 +7,7 @@ export default callback => {
   const [stateGeolocation, dispatchGeolocation] = useReducer(
     geolocationReducer,
     {
-      isLoading: true,
+      isLoading: false,
       isError: false,
       coors: null,
       updateGeolocation: true,

@@ -1,9 +1,11 @@
 import React from 'react';
 import {Text, View} from 'react-native';
+import Loading from './Loading';
 import LocationData from './LocationData';
 import LocationSearch from './LocationSearch';
 import useGeolocation from '../hooks/useGeolocation';
 import useDataApi from '../hooks/useDataApi';
+import useTimeoutWait from '../hooks/useTimeoutWait';
 import {
   UPDATE,
   FETCH,
@@ -13,6 +15,8 @@ import {
 
 function Location() {
   console.log('Location!?');
+  const wait = useTimeoutWait({delay: 3000});
+  console.log(`wait ${wait}`);
   const setCoorsOptions = () => {
     console.log('setCoorsOptions');
     console.log(stateGeolocation);
@@ -29,12 +33,12 @@ function Location() {
   };
   const [stateGeolocation, dispatchGeolocation] = useGeolocation(setCoorsOptions);
   const [stateData, dispatchData] = useDataApi();
-  console.log('end locvation stateGeolocation');
+  console.log('end location stateGeolocation');
   console.log(stateGeolocation);
   return (
     <View>
-      {stateGeolocation.isLoading || stateData.isLoading || !stateData.city ? (
-        <Text>Is loading...</Text>
+      {wait || stateGeolocation.isLoading || stateData.isLoading || !stateData.city ? (
+        <Loading />
       ) : stateGeolocation.isError || stateData.isError ? (
         <Text>Something went wrong...</Text>
       ) : (
