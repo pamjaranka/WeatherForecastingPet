@@ -1,8 +1,9 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Text, View, SafeAreaView} from 'react-native';
 import Loading from './Loading';
 import LocationData from './LocationData';
 import LocationSearch from './LocationSearch';
+import Forecast from './Forecast';
 import useGeolocation from '../hooks/useGeolocation';
 import useDataApi from '../hooks/useDataApi';
 import useTimeoutWait from '../hooks/useTimeoutWait';
@@ -16,10 +17,10 @@ import {
 function Location() {
   console.log('Location!?');
   const wait = useTimeoutWait({delay: 3000});
-  console.log(`wait ${wait}`);
+
   const setCoorsOptions = () => {
-    console.log('setCoorsOptions');
-    console.log(stateGeolocation);
+    // console.log('setCoorsOptions');
+    // console.log(stateGeolocation);
     dispatchData({
       type: `${FETCH}${SET_OPTIONS}`,
       payload: stateGeolocation.coors,
@@ -33,8 +34,9 @@ function Location() {
   };
   const [stateGeolocation, dispatchGeolocation] = useGeolocation(setCoorsOptions);
   const [stateData, dispatchData] = useDataApi();
-  console.log('end location stateGeolocation');
-  console.log(stateGeolocation);
+  // console.log('end location stateGeolocation');
+  // console.log(stateGeolocation);
+  console.log(stateData);
   return (
     <View>
       {wait || stateGeolocation.isLoading || stateData.isLoading || !stateData.city ? (
@@ -42,7 +44,7 @@ function Location() {
       ) : stateGeolocation.isError || stateData.isError ? (
         <Text>Something went wrong...</Text>
       ) : (
-        <>
+        <SafeAreaView>
           <LocationData
             locationCity={stateData.city}
             onUpdate={updateGeolocation}
@@ -50,7 +52,14 @@ function Location() {
           <LocationSearch
             locationCity={stateData.city}
             onChange={changeCity} />
-        </>
+          <Forecast
+            main={stateData.data[0].weather[0].main}
+            description={stateData.data[0].weather[0].description}
+            wind={stateData.data[0].wind}
+            clouds={stateData.data[0].clouds.all}
+            {...stateData.data[0].main}
+          />
+        </SafeAreaView>
       )}
     </View>
   );

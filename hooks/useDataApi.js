@@ -12,8 +12,8 @@ export default () => {
     city: null,
   });
 
-  console.log('useDataApi (stateData)');
-  console.log(stateData);
+  // console.log('useDataApi (stateData)');
+  //console.log(stateData);
 
   let url = 'https://api.openweathermap.org/data/2.5/find?';
   let apiOption = {
@@ -30,7 +30,7 @@ export default () => {
     url += flag < Object.keys(apiOption).length ? '&' : '';
   }
 
-  console.log(url);
+  //console.log(url);
 
   useEffect(() => {
     let didCancel = false;
@@ -40,7 +40,7 @@ export default () => {
       const fetchData = async () => {
         try {
           const result = await axios(url);
-          console.log('try');
+          //console.log('try');
           if (result && result.data) {
             dispatchData({
               type: `${FETCH}${SUCCESS}`,

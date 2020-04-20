@@ -14,21 +14,21 @@ export default callback => {
     },
   );
 
-  console.log('useGeolocation (stateGeolocation)');
-  console.log(stateGeolocation);
+  // console.log('useGeolocation (stateGeolocation)');
+  // console.log(stateGeolocation);
 
   useEffect(() => {
-    console.log('useGeolocation useEffect');
-    console.log(stateGeolocation);
+    // console.log('useGeolocation useEffect');
+    // console.log(stateGeolocation);
     let watchId = null;
     async function fetchGeolocation() {
       dispatchGeolocation({type: `${GEOLOCATION}${START}`});
 
-      console.log('fetchGeolocation');
+      //console.log('fetchGeolocation');
 
       watchId = await Geolocation.watchPosition(
         pos => {
-          console.log('watch!!');
+          //console.log('watch!!');
           //let payload =
           dispatchGeolocation({
             type: `${GEOLOCATION}${SUCCESS}`,
@@ -39,7 +39,6 @@ export default callback => {
           });
 
           if (typeof callback === 'function') {
-            console.dir(callback)
             callback(pos.coords);
           }
         },
@@ -51,10 +50,6 @@ export default callback => {
       );
     }
     fetchGeolocation();
-    // .then( () => {
-    //   console.log('THEN');
-    //   console.log(stateGeolocation);
-    // });
 
     return () => Geolocation.clearWatch(watchId);
   }, [stateGeolocation.updateGeolocation]);
