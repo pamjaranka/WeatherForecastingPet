@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import {TextInput, View, Button} from 'react-native';
+import {TextInput, View, Button, StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
+import {padding} from '../styles/base';
 
 LocationSearch.propTypes = {
   locationCity: PropTypes.string.isRequired,
@@ -12,7 +13,7 @@ function LocationSearch(props) {
   const [query, setQuery] = useState(locationCity);
   console.log('LocationSearch');
   return (
-    <View>
+    <View style={styles.container}>
       <TextInput
         style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
         onChangeText={text => setQuery(text)}
@@ -30,5 +31,11 @@ function LocationSearch(props) {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    padding: padding.md,
+  },
+});
 
 export default LocationSearch;

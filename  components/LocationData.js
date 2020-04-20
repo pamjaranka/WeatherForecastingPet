@@ -1,6 +1,7 @@
 import React from 'react';
-import {Text, View, Button} from 'react-native';
+import {Text, View, Button, StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
+import {padding} from '../styles/base';
 
 LocationData.propTypes = {
   locationCity: PropTypes.string.isRequired,
@@ -15,7 +16,7 @@ function LocationData(props) {
   console.log('LocationData')
 
   return (
-    <View>
+    <View style={styles.container}>
       <Text>Your current city is {locationCity}.</Text>
       <Button
         onPress={() => {
@@ -29,5 +30,11 @@ function LocationData(props) {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    padding: padding.md,
+  },
+});
 
 export default LocationData;

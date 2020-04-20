@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
+import {padding, fonts} from '../styles/base';
 
 Forecast.propTypes = {
   temp: PropTypes.number.isRequired,
@@ -31,7 +32,7 @@ function Forecast(props) {
 
   console.log(props);
   return (
-    <View>
+    <View style={styles.container}>
       <Text>Temperature: {temp} C.</Text>
       <Text>Temperature maximum: {temp_max} C.</Text>
       <Text>Temperature minimum: {temp_min} C.</Text>
@@ -46,5 +47,11 @@ function Forecast(props) {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    padding: padding.md,
+  },
+});
 
 export default Forecast;
