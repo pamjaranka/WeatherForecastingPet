@@ -53,6 +53,7 @@ function Location() {
             locationCity={stateData.city}
             onChange={changeCity} />
           <Forecast
+            //data={stateData.data[0]}
             main={stateData.data[0].weather[0].main}
             description={stateData.data[0].weather[0].description}
             wind={stateData.data[0].wind}
