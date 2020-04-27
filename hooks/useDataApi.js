@@ -16,6 +16,7 @@ export default () => {
   //console.log(stateData);
 
   let url = 'https://api.openweathermap.org/data/2.5/find?';
+  // let url = 'https://api.openweathermap.org/data/2.5/onecall?';
   let apiOption = {
     cnt: 10,
     units: 'metric',
@@ -40,7 +41,8 @@ export default () => {
       const fetchData = async () => {
         try {
           const result = await axios(url);
-          //console.log('try');
+          // console.log('try!');
+          // console.log(result.data);
           if (result && result.data) {
             dispatchData({
               type: `${FETCH}${SUCCESS}`,

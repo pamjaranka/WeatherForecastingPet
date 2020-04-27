@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View, SafeAreaView} from 'react-native';
+import {Text, View, SafeAreaView, ScrollView} from 'react-native';
 import Loading from './Loading';
 import LocationData from './LocationData';
 import LocationSearch from './LocationSearch';
@@ -38,7 +38,7 @@ function Location() {
   // console.log(stateGeolocation);
   console.log(stateData);
   return (
-    <View>
+    <ScrollView>
       {wait || stateGeolocation.isLoading || stateData.isLoading || !stateData.city ? (
         <Loading />
       ) : stateGeolocation.isError || stateData.isError ? (
@@ -58,11 +58,13 @@ function Location() {
             description={stateData.data[0].weather[0].description}
             wind={stateData.data[0].wind}
             clouds={stateData.data[0].clouds.all}
+            rain={stateData.data[0].rain}
+            snow={stateData.data[0].snow}
             {...stateData.data[0].main}
           />
         </SafeAreaView>
       )}
-    </View>
+    </ScrollView>
   );
 }
 

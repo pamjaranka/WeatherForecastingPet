@@ -12,6 +12,8 @@ export const forecastDataPropTypes = {
   main: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   clouds: PropTypes.number.isRequired,
+  rain: PropTypes.object,
+  snow: PropTypes.object,
   wind: PropTypes.shape({
     speed: PropTypes.number.isRequired,
     deg: PropTypes.number.isRequired,
