@@ -28,7 +28,7 @@ export const usePetPropTypes = {
 usePet.propTypes = usePetPropTypes;
 
 function usePet(props) {
-  const {data, petInit, ext} = props;
+  const {data, petInit} = props;
   const [pet, setPet] = useState('');
 
   const {
@@ -73,7 +73,6 @@ function usePet(props) {
     }
 
     return fileName;
-    // return `../assets/images/${fileName}.gif`;
   };
 
   useEffect(() => {

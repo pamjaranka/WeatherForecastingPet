@@ -8,17 +8,14 @@ ForecastPetImage.propTypes = usePetPropTypes;
 function ForecastPetImage(props) {
   const pet = usePet(props);
 
-  console.log(pet);
-  console.log(IMAGE_SOURCE);
-  console.log(IMAGE_SOURCE[pet]);
-
   return (
     <>
       {pet ?
         <Image
           style={styles.image}
           source={IMAGE_SOURCE[pet]}
-        /> : <Text>111</Text>}
+        />
+        : <Text>111</Text>}
     </>
   );
 }

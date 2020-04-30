@@ -12,6 +12,7 @@ function LocationSearch(props) {
   const {locationCity, onChange} = props;
   const [query, setQuery] = useState(locationCity);
   console.log('LocationSearch');
+  // console.log(query);
   return (
     <View style={styles.container}>
       <TextInput

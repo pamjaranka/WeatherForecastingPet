@@ -8,6 +8,7 @@ import {PET_DOG} from '../constants/forecast';
 Forecast.propTypes = forecastDataPropTypes;
 
 function Forecast(props) {
+  // console.log('Forecast');
   return (
     <View style={styles.container}>
       <ForecastData {...props} />

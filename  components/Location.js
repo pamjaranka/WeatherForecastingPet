@@ -38,13 +38,13 @@ function Location() {
   // console.log(stateGeolocation);
   console.log(stateData);
   return (
-    <ScrollView>
+    <SafeAreaView>
       {wait || stateGeolocation.isLoading || stateData.isLoading || !stateData.city ? (
         <Loading />
       ) : stateGeolocation.isError || stateData.isError ? (
         <Text>Something went wrong...</Text>
       ) : (
-        <SafeAreaView>
+        <ScrollView>
           <LocationData
             locationCity={stateData.city}
             onUpdate={updateGeolocation}
@@ -62,9 +62,9 @@ function Location() {
             snow={stateData.data[0].snow}
             {...stateData.data[0].main}
           />
-        </SafeAreaView>
+        </ScrollView>
       )}
-    </ScrollView>
+    </SafeAreaView>
   );
 }
 
