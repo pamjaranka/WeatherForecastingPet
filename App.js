@@ -8,13 +8,11 @@
 
 import React from 'react';
 
-import Location from './ components/Location';
+import Location from './components/Location';
 
 const App: () => React$Node = () => {
   return (
-    <>
-      <Location />
-    </>
+    <Location />
   );
 };
 
