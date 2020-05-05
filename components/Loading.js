@@ -1,7 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
-import {padding, fonts} from '../styles/base';
+import {PADDING, FONTS, COLORS} from '../styles/base';
 
 function Loading() {
   return (
@@ -16,13 +15,13 @@ function Loading() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.white,
+    backgroundColor: COLORS.white,
     flex: 1,
     justifyContent: 'center',
-    padding: padding.md,
+    padding: PADDING.md,
   },
   title: {
-    fontFamily: fonts.serifBold,
+    fontFamily: FONTS.serifBold,
     fontSize: 42,
   },
 });

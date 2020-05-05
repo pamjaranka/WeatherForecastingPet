@@ -1,11 +1,16 @@
-export const padding = {
+export const PADDING = {
   sm: 10,
   md: 20,
   lg: 30,
   xl: 40,
 };
 
-export const fonts = {
+export const COLORS = {
+  blue: '#33D1FF',
+  white: 'white',
+};
+
+export const FONTS = {
   sm: 12,
   md: 18,
   lg: 28,

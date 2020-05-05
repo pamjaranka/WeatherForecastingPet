@@ -1,13 +1,22 @@
 import React from 'react';
-import {Body, Header, Title, Right, Icon, Button, Left, Subtitle} from 'native-base';
+import {
+  Body,
+  Header,
+  Title,
+  Right,
+  Icon,
+  Button,
+  Left,
+  Subtitle,
+} from 'native-base';
 import {StyleSheet} from 'react-native';
-import {fonts} from '../styles/base';
+import {FONTS} from '../styles/base';
 
 function HeaderContainer() {
   return (
     <Header noLeft transparent>
       <Left>
-        <Icon type="FontAwesome5" name="paw" style={styles.icon}  />
+        <Icon type="FontAwesome5" name="paw" style={styles.icon} />
       </Left>
       <Body>
         <Title style={styles.title}>WFP</Title>
@@ -15,7 +24,7 @@ function HeaderContainer() {
       </Body>
       <Right>
         <Button transparent>
-          <Icon name='search' style={styles.icon} />
+          <Icon name="search" style={styles.icon} />
         </Button>
       </Right>
     </Header>
@@ -24,11 +33,11 @@ function HeaderContainer() {
 
 const styles = StyleSheet.create({
   title: {
-    fontFamily: fonts.serifBold,
+    fontFamily: FONTS.serifBold,
     fontSize: 20,
   },
   subtitle: {
-    fontFamily: fonts.primary,
+    fontFamily: FONTS.primary,
     fontSize: 12,
   },
   icon: {
@@ -37,4 +46,5 @@ const styles = StyleSheet.create({
     padding: 5,
   },
 });
+
 export default HeaderContainer;

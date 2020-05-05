@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, View, Button, StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
-import {padding} from '../styles/base';
+import {PADDING} from '../styles/base';
 
 LocationData.propTypes = {
   locationCity: PropTypes.string.isRequired,
@@ -33,7 +33,7 @@ function LocationData(props) {
 
 const styles = StyleSheet.create({
   container: {
-    padding: padding.md,
+    padding: PADDING.md,
   },
 });
 
