@@ -8,11 +8,11 @@
 
 import React from 'react';
 
-import Location from './components/Location';
+import StartScreen from './components/StartScreen';
 
 const App: () => React$Node = () => {
   return (
-    <Location />
+    <StartScreen />
   );
 };
 
