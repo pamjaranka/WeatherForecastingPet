@@ -8,17 +8,17 @@ import useTimeoutWait from '../hooks/useTimeoutWait';
 import {ScrollView} from 'react-native';
 import Loading from './Loading';
 
-function StartScreen(props) {
+function StartScreen() {
   const wait = useTimeoutWait({delay: 3000});
-  const [
+  const {
     isError,
     isLoading,
     dataToSend,
     city,
     changeCity,
     updateGeolocation,
-  ] = useData();
-  console.log(dataToSend);
+  } = useData();
+  // console.log(dataToSend);
 
   return (
     <Container>

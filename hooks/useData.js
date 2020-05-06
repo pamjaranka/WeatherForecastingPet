@@ -31,5 +31,5 @@ export default () => {
         }
       : null;
 
-  return [isError, isLoading, dataToSend, city, changeCity, updateGeolocation];
+  return {isError, isLoading, dataToSend, city, changeCity, updateGeolocation};
 };
