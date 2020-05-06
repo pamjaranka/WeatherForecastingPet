@@ -17,7 +17,7 @@ export const forecastDataPropTypes = {
   wind: PropTypes.shape({
     speed: PropTypes.number.isRequired,
     deg: PropTypes.number.isRequired,
-  }),
+  }).isRequired,
 };
 
 ForecastData.propTypes = forecastDataPropTypes;
