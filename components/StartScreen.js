@@ -1,13 +1,17 @@
 import React from 'react';
 import HeaderContainer from './HeaderContainer';
+import FooterContainer from './FooterContainer';
 import Location from './Location';
-import {Container} from 'native-base';
+import {Container, Content} from 'native-base';
 
 function StartScreen(props) {
   return (
     <Container>
       <HeaderContainer />
-      <Location />
+      <Content>
+        <Location />
+      </Content>
+      <FooterContainer />
     </Container>
   );
 }

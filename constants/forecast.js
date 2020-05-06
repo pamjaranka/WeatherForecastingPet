@@ -9,3 +9,6 @@ export const TEMP_FROSTY = '_frosty';
 export const SUNNY = '_sunny';
 export const RAIN = '_rain';
 export const SNOW = '_snow';
+
+export const CLOUDS = '_clouds';
+export const WIND = '_wind';
