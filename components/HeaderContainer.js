@@ -10,7 +10,7 @@ import {
   Subtitle,
 } from 'native-base';
 import {StyleSheet} from 'react-native';
-import {FONTS} from '../styles/base';
+import {FONTS, COLORS, PADDING} from '../styles/base';
 
 function HeaderContainer() {
   return (
@@ -38,12 +38,12 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontFamily: FONTS.primary,
-    fontSize: 12,
+    fontSize: FONTS.sm,
   },
   icon: {
-    color: 'black',
+    color: COLORS.blue,
     fontSize: 30,
-    padding: 5,
+    padding: PADDING.xs,
   },
 });
 
