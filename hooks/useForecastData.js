@@ -17,6 +17,8 @@ export const useForecastDataPropTypes = {
   snow: PropTypes.object,
 };
 
+useForecastData.propTypes = useForecastDataPropTypes;
+
 function useForecastData(props) {
   const [temp, setTemp] = useState('');
   const [isSunny, setIsSunny] = useState(false);

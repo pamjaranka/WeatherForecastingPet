@@ -5,12 +5,14 @@ import Forecast from './Forecast';
 import PropTypes from 'prop-types';
 import {forecastDataPropTypes} from './ForecastData';
 
-ContentContainer.propTypes = {
+export const contentPropTypes = {
   city: PropTypes.string.isRequired,
   data: PropTypes.shape(forecastDataPropTypes).isRequired,
   changeCity: PropTypes.func.isRequired,
   updateGeolocation: PropTypes.func.isRequired,
 };
+
+ContentContainer.propTypes = contentPropTypes;
 
 function ContentContainer(props) {
   const {city, data, changeCity, updateGeolocation} = props;
