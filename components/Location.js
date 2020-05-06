@@ -5,7 +5,7 @@ import LocationData from './LocationData';
 import LocationSearch from './LocationSearch';
 import Forecast from './Forecast';
 import useGeolocation from '../hooks/useGeolocation';
-import useDataApi from '../hooks/useDataApi';
+import useDataApi from '../hooks/useOpenweathermapApi';
 import useTimeoutWait from '../hooks/useTimeoutWait';
 import {
   UPDATE,

@@ -1,10 +1,10 @@
 import {useEffect, useReducer} from 'react';
 import dataFetchReducer from '../reducer/data';
-import {FAIL, FETCH, START, SUCCESS} from '../constants';
+import {FAIL, FETCH, SET_OPTIONS, START, SUCCESS} from '../constants';
 import axios from 'axios';
 
 export default () => {
-  const [stateData, dispatchData] = useReducer(dataFetchReducer, {
+  const [data, dispatchData] = useReducer(dataFetchReducer, {
     isLoading: false,
     isError: false,
     options: null,
@@ -12,8 +12,12 @@ export default () => {
     city: null,
   });
 
-  // console.log('useDataApi (stateData)');
-  //console.log(stateData);
+  const changeCity = city => {
+    dispatchData({type: `${FETCH}${SET_OPTIONS}`, payload: {q: city}});
+  };
+
+  // console.log('useDataApi (data)');
+  //console.log(data);
 
   let url = 'https://api.openweathermap.org/data/2.5/find?';
   // let url = 'https://api.openweathermap.org/data/2.5/onecall?';
@@ -21,7 +25,7 @@ export default () => {
     cnt: 10,
     units: 'metric',
     appid: 'c85e37b1b752a38ed49c404c510ed21a',
-    ...stateData.options,
+    ...data.options,
   };
 
   let flag = 0;
@@ -36,7 +40,7 @@ export default () => {
   useEffect(() => {
     let didCancel = false;
     console.log(`did cancel ${didCancel}`);
-    if (stateData.options) {
+    if (data.options) {
       dispatchData({type: `${FETCH}${START}`});
       const fetchData = async () => {
         try {
@@ -59,7 +63,7 @@ export default () => {
     return () => {
       didCancel = true;
     };
-  }, [stateData.options, url]);
+  }, [data.options, url]);
 
-  return [stateData, dispatchData];
+  return [data, dispatchData, changeCity];
 };

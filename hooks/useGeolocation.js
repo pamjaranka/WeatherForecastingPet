@@ -1,6 +1,6 @@
 import {useEffect, useReducer} from 'react';
 import geolocationReducer from '../reducer/geolocation';
-import {FAIL, GEOLOCATION, START, SUCCESS} from '../constants';
+import {FAIL, GEOLOCATION, START, SUCCESS, UPDATE} from '../constants';
 import Geolocation from '@react-native-community/geolocation';
 
 export default callback => {
@@ -13,6 +13,10 @@ export default callback => {
       updateGeolocation: true,
     },
   );
+
+  const updateGeolocation = () => {
+    dispatchGeolocation({type: `${GEOLOCATION}${UPDATE}`, payload: true});
+  };
 
   // console.log('useGeolocation (stateGeolocation)');
   // console.log(stateGeolocation);
@@ -54,5 +58,5 @@ export default callback => {
     return () => Geolocation.clearWatch(watchId);
   }, [stateGeolocation.updateGeolocation]);
 
-  return [stateGeolocation, dispatchGeolocation];
+  return [stateGeolocation, updateGeolocation];
 };
