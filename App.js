@@ -22,7 +22,7 @@ const App: () => React$Node = () => {
   const {
     isError,
     isLoading,
-    dataToSend,
+    dataApi,
     city,
     changeCity,
     updateGeolocation,
@@ -39,7 +39,7 @@ const App: () => React$Node = () => {
         ) : (
           <ScrollView>
             <StartScreen
-              data={dataToSend}
+              dataApi={dataApi}
               city={city}
               changeCity={changeCity}
               updateGeolocation={updateGeolocation}
@@ -47,7 +47,7 @@ const App: () => React$Node = () => {
           </ScrollView>
         )}
       </Content>
-      <FooterContainer data={dataToSend} />
+      <FooterContainer dataApi={dataApi} />
     </Container>
   );
 };

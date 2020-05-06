@@ -17,9 +17,10 @@ export const useForecastDataPropTypes = {
   snow: PropTypes.object,
 };
 
-useForecastData.propTypes = useForecastDataPropTypes;
+useForecast.propTypes = useForecastDataPropTypes;
 
-function useForecastData(props) {
+function useForecast(props) {
+  const [isLoaded, setIsLoaded] = useState(false);
   const [temp, setTemp] = useState('');
   const [isSunny, setIsSunny] = useState(false);
   const [isRain, setIsRain] = useState(false);
@@ -32,8 +33,6 @@ function useForecastData(props) {
     rain,
     snow,
   } = props;
-
-  console.log(props);
 
   useEffect(() => {
     if (feels_like >= 28) {
@@ -67,8 +66,10 @@ function useForecastData(props) {
     ) {
       setIsSnow(true);
     }
+
+    setIsLoaded(true);
   }, []);
-  return {temp, isSunny, isRain, isSnow};
+  return {isLoaded, temp, isSunny, isRain, isSnow};
 }
 
-export default useForecastData;
+export default useForecast;

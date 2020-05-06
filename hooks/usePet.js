@@ -1,10 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {RAIN, SNOW, SUNNY} from '../constants/forecast';
-import useForecastData, {useForecastDataPropTypes} from './useForecastData';
-
+import {forecastPropTypes} from '../components/ContentContainer';
 export const usePetPropTypes = {
-  data: PropTypes.shape(useForecastDataPropTypes).isRequired,
+  forecast: PropTypes.shape(forecastPropTypes).isRequired,
   petInit: PropTypes.string.isRequired,
   ext: PropTypes.string.isRequired,
 };
@@ -12,11 +11,12 @@ export const usePetPropTypes = {
 usePet.propTypes = usePetPropTypes;
 
 function usePet(props) {
-  const {data, petInit} = props;
+  const {forecast, petInit} = props;
   const [pet, setPet] = useState('');
-  const forecastData = useForecastData(data);
 
-  const {temp, isSunny, isRain, isSnow} = forecastData;
+  const {temp, isSunny, isRain, isSnow} = forecast;
+  console.log('usePet');
+  console.log(forecast);
 
   const getFileName = () => {
     let fileName = `${petInit}${temp}`;
@@ -38,7 +38,7 @@ function usePet(props) {
 
   useEffect(() => {
     setPet(getFileName());
-  }, [forecastData]);
+  }, [forecast]);
 
   return pet;
 }

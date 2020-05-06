@@ -18,7 +18,7 @@ export default () => {
   let isLoading = stateGeolocation.isLoading || data.isLoading || !data.city;
   let city = data.city;
 
-  const dataToSend =
+  const dataApi =
     data && data.data && data.data[0]
       ? {
           main: data.data[0].weather[0].main,
@@ -31,5 +31,5 @@ export default () => {
         }
       : null;
 
-  return {isError, isLoading, dataToSend, city, changeCity, updateGeolocation};
+  return {isError, isLoading, dataApi, city, changeCity, updateGeolocation};
 };

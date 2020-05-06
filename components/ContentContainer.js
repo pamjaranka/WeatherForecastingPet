@@ -7,16 +7,26 @@ import {forecastDataPropTypes} from './ForecastData';
 
 export const contentPropTypes = {
   city: PropTypes.string.isRequired,
-  data: PropTypes.shape(forecastDataPropTypes).isRequired,
+  dataApi: PropTypes.shape(forecastDataPropTypes).isRequired,
   changeCity: PropTypes.func.isRequired,
   updateGeolocation: PropTypes.func.isRequired,
 };
 
-ContentContainer.propTypes = contentPropTypes;
+export const forecastPropTypes = {
+  temp: PropTypes.string.isRequired,
+  isSunny: PropTypes.bool.isRequired,
+  isRain: PropTypes.bool.isRequired,
+  isSnow: PropTypes.bool.isRequired,
+};
+
+ContentContainer.propTypes = {
+  forecast: PropTypes.shape(forecastPropTypes).isRequired,
+  ...contentPropTypes,
+};
 
 function ContentContainer(props) {
-  const {city, data, changeCity, updateGeolocation} = props;
-  console.log(data);
+  const {city, dataApi, forecast, changeCity, updateGeolocation} = props;
+
   return (
     <>
       <LocationData
@@ -26,7 +36,10 @@ function ContentContainer(props) {
       <LocationSearch
         locationCity={city}
         onChange={changeCity} />
-      <Forecast {...data} />
+      <Forecast
+        dataApi={dataApi}
+        forecast={forecast}
+      />
     </>
   );
 }
