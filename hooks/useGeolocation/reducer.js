@@ -1,32 +1,32 @@
-import {START, SUCCESS, FAIL, SET_OPTIONS, FETCH} from '../constants';
+import {START, SUCCESS, FAIL, UPDATE, GEOLOCATION} from '../../constants';
 
 export default (state, action) => {
   console.log(action);
   switch (action.type) {
-    case `${FETCH}${START}`:
+    case `${GEOLOCATION}${START}`:
       return {
         ...state,
         isLoading: true,
         isError: false,
       };
-    case `${FETCH}${SUCCESS}`:
+    case `${GEOLOCATION}${SUCCESS}`:
       return {
         ...state,
         isLoading: false,
         isError: false,
-        data: action.payload,
-        city: action.payload[0].name,
+        coors: action.payload,
+        updateGeolocation: false,
       };
-    case `${FETCH}${FAIL}`:
+    case `${GEOLOCATION}${FAIL}`:
       return {
         ...state,
         isLoading: false,
         isError: true,
       };
-    case `${FETCH}${SET_OPTIONS}`:
+    case `${GEOLOCATION}${UPDATE}`:
       return {
         ...state,
-        options: action.payload,
+        updateGeolocation: action.payload,
       };
     default:
       throw new Error();

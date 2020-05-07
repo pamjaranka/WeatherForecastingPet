@@ -1,10 +1,10 @@
 import {useEffect, useReducer} from 'react';
-import dataFetchReducer from '../reducer/data';
-import {FAIL, FETCH, SET_OPTIONS, START, SUCCESS} from '../constants';
+import reducer from './reducer';
+import {FAIL, FETCH, SET_OPTIONS, START, SUCCESS} from '../../constants';
 import axios from 'axios';
 
-export default () => {
-  const [data, dispatchData] = useReducer(dataFetchReducer, {
+export default callback => {
+  const [data, dispatchData] = useReducer(reducer, {
     isLoading: false,
     isError: false,
     options: null,
@@ -52,6 +52,10 @@ export default () => {
               type: `${FETCH}${SUCCESS}`,
               payload: result.data.list,
             });
+
+            if (typeof callback === 'function') {
+              callback();
+            }
           }
         } catch (e) {
           console.log(e.message);

@@ -1,17 +1,17 @@
 import {useEffect, useReducer} from 'react';
-import geolocationReducer from '../reducer/geolocation';
-import {FAIL, GEOLOCATION, START, SUCCESS, UPDATE} from '../constants';
+import reducer from './reducer';
+import {FAIL, GEOLOCATION, START, SUCCESS, UPDATE} from '../../constants';
 import Geolocation from '@react-native-community/geolocation';
 
 export default callback => {
   const [stateGeolocation, dispatchGeolocation] = useReducer(
-    geolocationReducer,
+    reducer,
     {
-      isLoading: false,
-      isError: false,
-      coors: null,
-      updateGeolocation: true,
-    },
+    isLoading: false,
+    isError: false,
+    coors: null,
+    updateGeolocation: true,
+  },
   );
 
   const updateGeolocation = () => {
