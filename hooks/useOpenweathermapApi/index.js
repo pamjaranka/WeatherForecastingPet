@@ -1,6 +1,11 @@
 import {useEffect, useReducer} from 'react';
 import reducer from './reducer';
-import {FAIL, FETCH, SET_OPTIONS, START, SUCCESS} from '../../constants';
+import {
+  fetchFail,
+  fetchSetOptions,
+  fetchStart,
+  fetchSuccess,
+} from './actionCreators';
 import axios from 'axios';
 
 export default callback => {
@@ -13,7 +18,7 @@ export default callback => {
   });
 
   const changeCity = city => {
-    dispatchData({type: `${FETCH}${SET_OPTIONS}`, payload: {q: city}});
+    dispatchData(fetchSetOptions({q: city}));
   };
 
   // console.log('useDataApi (data)');
@@ -41,17 +46,14 @@ export default callback => {
     let didCancel = false;
     console.log(`did cancel ${didCancel}`);
     if (data.options) {
-      dispatchData({type: `${FETCH}${START}`});
+      dispatchData(fetchStart());
       const fetchData = async () => {
         try {
           const result = await axios(url);
           // console.log('try!');
           // console.log(result.data);
           if (result && result.data) {
-            dispatchData({
-              type: `${FETCH}${SUCCESS}`,
-              payload: result.data.list,
-            });
+            dispatchData(fetchSuccess(result.data.list));
 
             if (typeof callback === 'function') {
               callback();
@@ -59,7 +61,7 @@ export default callback => {
           }
         } catch (e) {
           console.log(e.message);
-          dispatchData({type: `${FETCH}${FAIL}`});
+          dispatchData(fetchFail());
         }
       };
       fetchData();

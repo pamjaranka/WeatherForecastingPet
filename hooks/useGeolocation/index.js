@@ -1,6 +1,11 @@
 import {useEffect, useReducer} from 'react';
 import reducer from './reducer';
-import {FAIL, GEOLOCATION, START, SUCCESS, UPDATE} from '../../constants';
+import {
+  geolocationFail,
+  geolocationUpdate,
+  geolocationStart,
+  geolocationSuccess
+} from './actionCreators'
 import Geolocation from '@react-native-community/geolocation';
 
 export default callback => {
@@ -15,7 +20,7 @@ export default callback => {
   );
 
   const updateGeolocation = () => {
-    dispatchGeolocation({type: `${GEOLOCATION}${UPDATE}`, payload: true});
+    dispatchGeolocation(geolocationUpdate(true));
   };
 
   // console.log('useGeolocation (stateGeolocation)');
@@ -26,7 +31,7 @@ export default callback => {
     // console.log(stateGeolocation);
     let watchId = null;
     async function fetchGeolocation() {
-      dispatchGeolocation({type: `${GEOLOCATION}${START}`});
+      dispatchGeolocation(geolocationStart());
 
       //console.log('fetchGeolocation');
 
@@ -34,13 +39,12 @@ export default callback => {
         pos => {
           //console.log('watch!!');
           //let payload =
-          dispatchGeolocation({
-            type: `${GEOLOCATION}${SUCCESS}`,
-            payload: {
+          dispatchGeolocation(
+            geolocationSuccess({
               lat: pos.coords.latitude,
               lon: pos.coords.longitude,
-            },
-          });
+            }),
+          );
 
           if (typeof callback === 'function') {
             callback(pos.coords);
@@ -48,7 +52,7 @@ export default callback => {
         },
         e => {
           console.log(e);
-          dispatchGeolocation({type: `${GEOLOCATION}${FAIL}`});
+          dispatchGeolocation(geolocationFail());
         },
         {maximumAge: 0},
       );

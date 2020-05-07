@@ -1,0 +1,6 @@
+import {START, SUCCESS, FAIL, UPDATE, GEOLOCATION} from '../../constants';
+
+export const GEOLOCATION_START = `${GEOLOCATION}${START}`;
+export const GEOLOCATION_SUCCESS = `${GEOLOCATION}${SUCCESS}`;
+export const GEOLOCATION_FAIL = `${GEOLOCATION}${FAIL}`;
+export const GEOLOCATION_UPDATE = `${GEOLOCATION}${UPDATE}`;
