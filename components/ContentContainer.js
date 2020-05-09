@@ -7,9 +7,11 @@ import {forecastDataPropTypes} from './ForecastData';
 
 export const forecastPropTypes = {
   temp: PropTypes.string.isRequired,
+  isClouds: PropTypes.bool.isRequired,
   isSunny: PropTypes.bool.isRequired,
   isRain: PropTypes.bool.isRequired,
   isSnow: PropTypes.bool.isRequired,
+  isWind: PropTypes.bool.isRequired,
 };
 
 export const contentPropTypes = {

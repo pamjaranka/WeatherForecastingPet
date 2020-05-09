@@ -13,7 +13,13 @@ import {
   TEMP_FROSTY,
   TEMP_HOT,
   TEMP_MILD,
-  TEMP_WARM
+  TEMP_WARM,
+  TEMP_MEAUSURE_HOT,
+  TEMP_MEAUSURE_COLD,
+  TEMP_MEAUSURE_MILD,
+  TEMP_MEAUSURE_WARM,
+  CLOUDS_MEASURE,
+  WIND_MEASURE,
 } from '../../constants/forecast';
 
 const setForecast = data => {
@@ -24,18 +30,19 @@ const setForecast = data => {
     clouds,
     rain,
     snow,
+    wind,
   } = data;
 
   const checkTemp = () => {
-    if (feels_like >= 28) {
+    if (feels_like >= TEMP_MEAUSURE_HOT) {
       return TEMP_HOT;
-    } else if (feels_like >= 22 && feels_like < 28) {
+    } else if (feels_like >= TEMP_MEAUSURE_WARM && feels_like < TEMP_MEAUSURE_HOT) {
       return TEMP_WARM;
-    } else if (feels_like >= 12 && feels_like < 22) {
+    } else if (feels_like >= TEMP_MEAUSURE_MILD && feels_like < TEMP_MEAUSURE_WARM) {
       return TEMP_MILD;
-    } else if (feels_like >= -12 && feels_like < 12) {
+    } else if (feels_like >= TEMP_MEAUSURE_COLD && feels_like < TEMP_MEAUSURE_MILD) {
       return TEMP_COLD;
-    } else if (feels_like < -12) {
+    } else if (feels_like < TEMP_MEAUSURE_COLD) {
       return TEMP_FROSTY;
     }
   }
@@ -45,9 +52,11 @@ const setForecast = data => {
 
   const forecast = {
     temp: checkTemp(),
-    isSunny: clouds < 18,
+    isSunny: clouds < CLOUDS_MEASURE,
+    isClouds: clouds >= CLOUDS_MEASURE,
     isRain: rain !== null || checkWord('rain'),
     isSnow: snow !== null || checkWord('snow'),
+    isWind: wind.speed && wind.speed > WIND_MEASURE,
   };
 
   return forecast;

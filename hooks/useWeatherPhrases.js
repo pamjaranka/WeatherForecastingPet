@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import {
+  CLOUDS,
   RAIN,
   SNOW,
   SUNNY,
+  WIND,
 } from '../constants/forecast';
 import {PHRASE, WEATHER_PHRASES} from '../constants/weatherPhrases';
 import {forecastDataPropTypes} from '../components/ContentContainer';
@@ -19,18 +21,22 @@ function useWeatherPhrases(initPhrase, forecast) {
   const pickWeatherPhrase = () => {
     if (!forecast) return initPhrase;
 
-    const {temp, isSunny, isRain, isSnow} = forecast;
+    const {temp, isSunny, isRain, isSnow, isWind, isClouds} = forecast;
 
     let phraseKey = PHRASE;
 
-    if (temp) {
-      phraseKey += temp;
+    if (isWind) {
+      phraseKey += WIND;
     } else if (isSunny) {
       phraseKey += SUNNY;
     } else if (isRain) {
       phraseKey += RAIN;
     } else if (isSnow) {
       phraseKey += SNOW;
+    } else if (isClouds) {
+      phraseKey += CLOUDS;
+    } else if (temp) {
+      phraseKey += temp;
     }
     console.log(phraseKey);
     console.log(WEATHER_PHRASES[phraseKey]);

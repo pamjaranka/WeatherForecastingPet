@@ -12,3 +12,10 @@ export const SNOW = '_snow';
 
 export const CLOUDS = '_clouds';
 export const WIND = '_wind';
+
+export const TEMP_MEAUSURE_HOT = 28;
+export const TEMP_MEAUSURE_WARM = 22;
+export const TEMP_MEAUSURE_MILD = 12;
+export const TEMP_MEAUSURE_COLD = -12;
+export const CLOUDS_MEASURE = 38;
+export const WIND_MEASURE = 8;
