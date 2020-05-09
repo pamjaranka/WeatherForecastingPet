@@ -5,7 +5,7 @@ import {
   geolocationUpdate,
   geolocationStart,
   geolocationSuccess
-} from './actionCreators'
+} from './actionCreators';
 import Geolocation from '@react-native-community/geolocation';
 
 export default callback => {

@@ -20,8 +20,7 @@ export default (state, {type, payload}) => {
         ...state,
         isLoading: false,
         isError: false,
-        data: payload,
-        city: payload[0].name,
+        dataApi: payload,
       };
     case FETCH_FAIL:
       return {

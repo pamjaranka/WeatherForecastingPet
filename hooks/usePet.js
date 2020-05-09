@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {RAIN, SNOW, SUNNY} from '../constants/forecast';
 import {forecastPropTypes} from '../components/ContentContainer';
+
 export const usePetPropTypes = {
   forecast: PropTypes.shape(forecastPropTypes).isRequired,
   petInit: PropTypes.string.isRequired,

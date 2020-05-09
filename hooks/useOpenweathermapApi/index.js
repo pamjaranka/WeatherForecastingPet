@@ -13,8 +13,7 @@ export default callback => {
     isLoading: false,
     isError: false,
     options: null,
-    data: null,
-    city: null,
+    dataApi: null,
   });
 
   const changeCity = city => {
