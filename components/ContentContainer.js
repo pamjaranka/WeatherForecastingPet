@@ -25,8 +25,14 @@ export const contentPropTypes = {
 ContentContainer.propTypes = contentPropTypes;
 
 function ContentContainer(props) {
-  const {city, data, forecast, changeCity, updateGeolocation, updateWeatherPhrase} = props;
-  // updateWeatherPhrase(forecast);
+  const {
+    city,
+    data,
+    forecast,
+    changeCity,
+    updateGeolocation
+  } = props;
+
   return (
     <>
       <LocationData

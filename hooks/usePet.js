@@ -6,7 +6,6 @@ import {forecastPropTypes} from '../components/ContentContainer';
 export const usePetPropTypes = {
   forecast: PropTypes.shape(forecastPropTypes).isRequired,
   petInit: PropTypes.string.isRequired,
-  ext: PropTypes.string.isRequired,
 };
 
 usePet.propTypes = usePetPropTypes;
@@ -16,8 +15,7 @@ function usePet(props) {
   const [pet, setPet] = useState('');
 
   const {temp, isSunny, isRain, isSnow} = forecast;
-  console.log('usePet');
-  console.log(forecast);
+  // console.log('usePet');
 
   const getFileName = () => {
     let fileName = `${petInit}${temp}`;
@@ -38,6 +36,7 @@ function usePet(props) {
   };
 
   useEffect(() => {
+    // console.log('Pet WILL change');
     setPet(getFileName());
   }, [forecast]);
 

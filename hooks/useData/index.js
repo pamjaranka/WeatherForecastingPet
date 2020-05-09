@@ -3,11 +3,7 @@ import useGeolocation from '../useGeolocation';
 import useOpenweathermapApi from '../useOpenweathermapApi';
 import reducer from './reducer';
 import {fetchSetOptions} from '../useOpenweathermapApi/actionCreators';
-import {
-  setDataFail,
-  setDataStart,
-  setDataSuccess,
-} from './actionCreators';
+import {setDataFail, setDataStart, setDataSuccess} from './actionCreators';
 import {
   TEMP_COLD,
   TEMP_FROSTY,
@@ -23,30 +19,31 @@ import {
 } from '../../constants/forecast';
 
 const setForecast = data => {
-  const {
-    feels_like,
-    main,
-    description,
-    clouds,
-    rain,
-    snow,
-    wind,
-  } = data;
+  const {feels_like, main, description, clouds, rain, snow, wind} = data;
 
   const checkTemp = () => {
     if (feels_like >= TEMP_MEAUSURE_HOT) {
       return TEMP_HOT;
-    } else if (feels_like >= TEMP_MEAUSURE_WARM && feels_like < TEMP_MEAUSURE_HOT) {
+    } else if (
+      feels_like >= TEMP_MEAUSURE_WARM &&
+      feels_like < TEMP_MEAUSURE_HOT
+    ) {
       return TEMP_WARM;
-    } else if (feels_like >= TEMP_MEAUSURE_MILD && feels_like < TEMP_MEAUSURE_WARM) {
+    } else if (
+      feels_like >= TEMP_MEAUSURE_MILD &&
+      feels_like < TEMP_MEAUSURE_WARM
+    ) {
       return TEMP_MILD;
-    } else if (feels_like >= TEMP_MEAUSURE_COLD && feels_like < TEMP_MEAUSURE_MILD) {
+    } else if (
+      feels_like >= TEMP_MEAUSURE_COLD &&
+      feels_like < TEMP_MEAUSURE_MILD
+    ) {
       return TEMP_COLD;
     } else if (feels_like < TEMP_MEAUSURE_COLD) {
       return TEMP_FROSTY;
     }
-  }
-  const checkWord = (word) => {
+  };
+  const checkWord = word => {
     return main.indexOf(word) >= 0 || description.indexOf(word) >= 0;
   };
 
@@ -71,20 +68,18 @@ export default () => {
     forecast: null,
     city: null,
   });
-  console.log('useData');
+  // console.log('useData');
 
   const setCoorsOptions = () => {
     dispatchData(fetchSetOptions(stateGeolocation.coors));
   };
 
-  const [stateGeolocation, updateGeolocation] = useGeolocation(
-    setCoorsOptions,
-  );
+  const [stateGeolocation, updateGeolocation] = useGeolocation(setCoorsOptions);
   const [data, dispatchData, changeCity] = useOpenweathermapApi();
 
   useEffect(() => {
-    console.log('CHANGED!!');
-    console.log(data);
+    // console.log('useData WILL CHANGE');
+    // console.log(data);
     dispatch(setDataStart());
 
     if (data && data.dataApi && data.dataApi[0]) {
@@ -108,8 +103,7 @@ export default () => {
     } else if (stateGeolocation.isError || data.isError) {
       dispatch(setDataFail());
     }
+  }, [data.dataApi, data.isError, stateGeolocation.isError]);
 
-  }, [data.dataApi]);
-
- return {state, changeCity, updateGeolocation};
+  return {state, changeCity, updateGeolocation};
 };

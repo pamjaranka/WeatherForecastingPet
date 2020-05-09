@@ -13,7 +13,7 @@ useWeatherPhrases.propTypes = forecastDataPropTypes;
 
 function useWeatherPhrases(initPhrase, forecast) {
   const [weatherPhrase, setWeatherPhrase] = useState(initPhrase || 'Welcome');
-
+  // console.log('useWeatherPhrases');
   const getRandomInt = max => {
     return Math.floor(Math.random() * Math.floor(max));
   };
@@ -38,13 +38,14 @@ function useWeatherPhrases(initPhrase, forecast) {
     } else if (temp) {
       phraseKey += temp;
     }
-    console.log(phraseKey);
-    console.log(WEATHER_PHRASES[phraseKey]);
+    // console.log(phraseKey);
+    // console.log(WEATHER_PHRASES[phraseKey]);
 
     return WEATHER_PHRASES[phraseKey][getRandomInt(WEATHER_PHRASES[phraseKey].length)];
   };
 
   useEffect(() => {
+    // console.log('weather phrase WILL change');
     setWeatherPhrase(pickWeatherPhrase());
   }, [forecast]);
 

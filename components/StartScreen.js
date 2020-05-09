@@ -10,7 +10,7 @@ import useData from '../hooks/useData';
 import useWeatherPhrases from '../hooks/useWeatherPhrases';
 
 
-function StartScreen(props) {
+function StartScreen() {
   const wait = useTimeoutWait({delay: 3000});
   const {state, changeCity, updateGeolocation} = useData();
 
@@ -25,8 +25,8 @@ function StartScreen(props) {
 
   console.log('StartScreen');
   const weatherPhrase = useWeatherPhrases('Good boy!', forecast);
-  console.log('weatherPhrase');
-  console.log(weatherPhrase);
+  // console.log('weatherPhrase');
+  // console.log(weatherPhrase);
 
   return (
     <Container>

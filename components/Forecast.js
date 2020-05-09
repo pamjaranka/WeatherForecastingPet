@@ -17,12 +17,12 @@ function Forecast(props) {
     data,
     forecast,
   } = props;
-  console.log('Forecast');
-  console.log(forecast);
+  // console.log('Forecast');
+
   return (
     <View style={styles.container}>
       <ForecastData {...data} />
-      <ForecastPet petInit={PET_DOG} forecast={forecast} ext="gif" />
+      <ForecastPet petInit={PET_DOG} forecast={forecast} />
     </View>
   );
 }
