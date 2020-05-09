@@ -11,7 +11,7 @@ import {
   TEMP_WARM,
 } from './forecast';
 
-export const PHRASE = 'PHRASE';
+export const PHRASE = 'Phrase';
 
 export const WEATHER_PHRASES = {
   [`${PHRASE}${RAIN}`]: [

@@ -2,13 +2,16 @@ import React from 'react';
 import {Footer, Text} from 'native-base';
 import {StyleSheet} from 'react-native';
 import {FONTS, COLORS, PADDING} from '../styles/base';
-import {TEMP_FROSTY} from '../constants/forecast';
-import {PHRASE, WEATHER_PHRASES} from '../constants/weatherPhrases';
+import PropTypes from 'prop-types';
+
+FooterContainer.propTypes = {
+  phrase: PropTypes.string.isRequired,
+};
 
 function FooterContainer(props) {
   return (
     <Footer style={styles.footer}>
-      <Text style={styles.title}>{WEATHER_PHRASES[`${PHRASE}${TEMP_FROSTY}`][0]}</Text>
+      <Text style={styles.title}>{props.phrase}</Text>
     </Footer>
   );
 }

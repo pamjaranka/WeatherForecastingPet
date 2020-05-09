@@ -5,13 +5,6 @@ import Forecast from './Forecast';
 import PropTypes from 'prop-types';
 import {forecastDataPropTypes} from './ForecastData';
 
-export const contentPropTypes = {
-  city: PropTypes.string.isRequired,
-  dataApi: PropTypes.shape(forecastDataPropTypes).isRequired,
-  changeCity: PropTypes.func.isRequired,
-  updateGeolocation: PropTypes.func.isRequired,
-};
-
 export const forecastPropTypes = {
   temp: PropTypes.string.isRequired,
   isSunny: PropTypes.bool.isRequired,
@@ -19,14 +12,19 @@ export const forecastPropTypes = {
   isSnow: PropTypes.bool.isRequired,
 };
 
-ContentContainer.propTypes = {
+export const contentPropTypes = {
+  city: PropTypes.string.isRequired,
+  data: PropTypes.shape(forecastDataPropTypes).isRequired,
   forecast: PropTypes.shape(forecastPropTypes).isRequired,
-  ...contentPropTypes,
+  changeCity: PropTypes.func.isRequired,
+  updateGeolocation: PropTypes.func.isRequired,
 };
 
-function ContentContainer(props) {
-  const {city, dataApi, forecast, changeCity, updateGeolocation} = props;
+ContentContainer.propTypes = contentPropTypes;
 
+function ContentContainer(props) {
+  const {city, data, forecast, changeCity, updateGeolocation, updateWeatherPhrase} = props;
+  // updateWeatherPhrase(forecast);
   return (
     <>
       <LocationData
@@ -37,7 +35,7 @@ function ContentContainer(props) {
         locationCity={city}
         onChange={changeCity} />
       <Forecast
-        dataApi={dataApi}
+        data={data}
         forecast={forecast}
       />
     </>

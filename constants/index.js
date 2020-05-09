@@ -6,3 +6,4 @@ export const SET_OPTIONS = '_SET_OPTIONS';
 
 export const FETCH = 'FETCH';
 export const GEOLOCATION = 'GEOLOCATION';
+export const SET_DATA = 'SET_DATA';

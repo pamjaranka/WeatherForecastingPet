@@ -8,20 +8,20 @@ import {PET_DOG} from '../constants/forecast';
 import PropTypes from 'prop-types';
 
 Forecast.propTypes = {
-  dataApi: PropTypes.shape(forecastDataPropTypes).isRequired,
+  data: PropTypes.shape(forecastDataPropTypes).isRequired,
   forecast: PropTypes.shape(forecastPropTypes).isRequired,
 };
 
 function Forecast(props) {
   const {
-    dataApi,
+    data,
     forecast,
   } = props;
   console.log('Forecast');
   console.log(forecast);
   return (
     <View style={styles.container}>
-      <ForecastData {...dataApi} />
+      <ForecastData {...data} />
       <ForecastPet petInit={PET_DOG} forecast={forecast} ext="gif" />
     </View>
   );
