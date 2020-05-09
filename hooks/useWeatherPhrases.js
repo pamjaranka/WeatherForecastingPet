@@ -5,9 +5,9 @@ import {
   SUNNY,
 } from '../constants/forecast';
 import {PHRASE, WEATHER_PHRASES} from '../constants/weatherPhrases';
-import {useForecastDataPropTypes} from './useForecast';
+import {forecastDataPropTypes} from '../components/ContentContainer';
 
-useWeatherPhrases.propTypes = useForecastDataPropTypes;
+useWeatherPhrases.propTypes = forecastDataPropTypes;
 
 function useWeatherPhrases(initPhrase, forecast) {
   const [weatherPhrase, setWeatherPhrase] = useState(initPhrase || 'Welcome');
