@@ -46,7 +46,6 @@ function StartScreen() {
   return (
     <Container>
       <HeaderContainer
-        closeButton={closeButton}
         refreshButton={refreshButton}
         searchButton={showLocationSearchForm ? closeButton : searchButton}
       />
