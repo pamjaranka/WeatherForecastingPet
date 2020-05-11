@@ -1,23 +1,30 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ContentContainer from './ContentContainer';
 import {Container, Content, Text} from 'native-base';
 import HeaderContainer from './HeaderContainer';
 import Loading from './Loading';
-import {ScrollView} from 'react-native';
+import {ScrollView, StyleSheet} from 'react-native';
 import FooterContainer from './FooterContainer';
 import useTimeoutWait from '../hooks/useTimeoutWait';
 import useData from '../hooks/useData';
 import useWeatherPhrases from '../hooks/useWeatherPhrases';
-
+import {PADDING} from '../styles/base';
+import {ICON_CLOSE, ICON_SEARCH} from '../constants/icons';
 
 function StartScreen() {
+  const [showLocationSearchForm, setShowLocationSearchForm] = useState(false);
   const wait = useTimeoutWait({delay: 3000});
   const {state, changeCity, updateGeolocation} = useData();
+
+  const toggleLocationSearchForm = () => {
+    setShowLocationSearchForm(!showLocationSearchForm);
+  };
 
   const {
     isError,
     isLoaded,
     isLoading,
+    isCityError,
     data,
     city,
     forecast,
@@ -30,9 +37,12 @@ function StartScreen() {
 
   return (
     <Container>
-      <HeaderContainer />
-      <Content>
-        {wait || !isLoaded || isLoading ? (
+      <HeaderContainer
+        iconName={showLocationSearchForm ? ICON_CLOSE : ICON_SEARCH}
+        onSearchButtonPress={toggleLocationSearchForm}
+      />
+      <Content style={styles.container}>
+        {wait || isLoading ? (
           <Loading />
         ) : isError ? (
           <Text>Something went wrong...</Text>
@@ -44,6 +54,8 @@ function StartScreen() {
               data={data}
               forecast={forecast}
               updateGeolocation={updateGeolocation}
+              showLocationSearchForm={showLocationSearchForm}
+              isCityError={isCityError}
             />
           </ScrollView>
         )}
@@ -52,5 +64,12 @@ function StartScreen() {
     </Container>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    paddingLeft: PADDING.md,
+    paddingRight: PADDING.md,
+  },
+});
 
 export default StartScreen;

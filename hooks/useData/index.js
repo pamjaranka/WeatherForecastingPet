@@ -3,7 +3,7 @@ import useGeolocation from '../useGeolocation';
 import useOpenweathermapApi from '../useOpenweathermapApi';
 import reducer from './reducer';
 import {fetchSetOptions} from '../useOpenweathermapApi/actionCreators';
-import {setDataFail, setDataStart, setDataSuccess} from './actionCreators';
+import {setCityFail, setDataFail, setDataStart, setDataSuccess} from './actionCreators';
 import {
   TEMP_COLD,
   TEMP_FROSTY,
@@ -62,7 +62,8 @@ const setForecast = data => {
 export default () => {
   const [state, dispatch] = useReducer(reducer, {
     isLoading: false,
-    isLoaded: false,
+    // isLoaded: false,
+    isCityError: false,
     isError: false,
     data: null,
     forecast: null,
@@ -76,7 +77,8 @@ export default () => {
 
   const [stateGeolocation, updateGeolocation] = useGeolocation(setCoorsOptions);
   const [data, dispatchData, changeCity] = useOpenweathermapApi();
-
+  console.log('!!!!!!');
+  console.log(data);
   useEffect(() => {
     // console.log('useData WILL CHANGE');
     // console.log(data);
@@ -100,6 +102,9 @@ export default () => {
           forecast: forecast,
         }),
       );
+    } else if (data.searchCityError) {
+      console.log('CITY ERRROR')
+      dispatch(setCityFail());
     } else if (stateGeolocation.isError || data.isError) {
       dispatch(setDataFail());
     }

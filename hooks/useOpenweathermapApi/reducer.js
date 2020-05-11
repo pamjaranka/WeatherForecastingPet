@@ -1,5 +1,6 @@
 import {
   FETCH_FAIL,
+  FETCH_FAIL_CITY,
   FETCH_SET_OPTIONS,
   FETCH_START,
   FETCH_SUCCESS,
@@ -14,12 +15,14 @@ export default (state, {type, payload}) => {
         ...state,
         isLoading: true,
         isError: false,
+        searchCityError: false,
       };
     case FETCH_SUCCESS:
       return {
         ...state,
         isLoading: false,
         isError: false,
+        searchCityError: false,
         dataApi: payload,
       };
     case FETCH_FAIL:
@@ -27,10 +30,22 @@ export default (state, {type, payload}) => {
         ...state,
         isLoading: false,
         isError: true,
+        searchCityError: false,
+      };
+    case FETCH_FAIL_CITY:
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        dataApi: null,
+        searchCityError: true,
       };
     case FETCH_SET_OPTIONS:
       return {
         ...state,
+        isLoading: false,
+        isError: false,
+        searchCityError: false,
         options: payload,
       };
     default:

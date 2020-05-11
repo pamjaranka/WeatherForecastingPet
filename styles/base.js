@@ -7,13 +7,16 @@ export const PADDING = {
 };
 
 export const COLORS = {
-  black: '#000',
+  black: '#100B00',
+  grey: '#737B8F',
   blue: '#13b6d1',
+  red: '#DB162F',
   white: 'white',
 };
 
 export const FONTS = {
-  sm: 12,
+  xs: 12,
+  sm: 14,
   md: 18,
   lg: 28,
   primary: 'Roboto-Regular',

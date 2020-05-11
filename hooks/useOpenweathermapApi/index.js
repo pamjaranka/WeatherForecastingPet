@@ -2,6 +2,7 @@ import {useEffect, useReducer} from 'react';
 import reducer from './reducer';
 import {
   fetchFail,
+  fetchFailCity,
   fetchSetOptions,
   fetchStart,
   fetchSuccess,
@@ -12,6 +13,7 @@ export default callback => {
   const [data, dispatchData] = useReducer(reducer, {
     isLoading: false,
     isError: false,
+    searchCityError: false,
     options: null,
     dataApi: null,
   });
@@ -39,7 +41,8 @@ export default callback => {
     url += flag < Object.keys(apiOption).length ? '&' : '';
   }
 
-  //console.log(url);
+  console.log(url);
+  console.log(data.options);
 
   useEffect(() => {
     let didCancel = false;
@@ -49,13 +52,19 @@ export default callback => {
       const fetchData = async () => {
         try {
           const result = await axios(url);
-          // console.log('try!');
-          // console.log(result.data);
+          console.log('try!');
+          console.log(result.data);
           if (result && result.data) {
-            dispatchData(fetchSuccess(result.data.list));
+            if (result.data.count > 0) {
+              dispatchData(fetchSuccess(result.data.list));
 
-            if (typeof callback === 'function') {
-              callback();
+              if (typeof callback === 'function') {
+                callback();
+              }
+            } else if (result.data.count === 0 && data.options.q) {
+              dispatchData(fetchFailCity());
+            } else {
+              throw new Error();
             }
           }
         } catch (e) {

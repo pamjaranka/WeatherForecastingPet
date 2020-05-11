@@ -1,6 +1,7 @@
 import React from 'react';
+import {Text, View} from 'react-native';
 import LocationData from './LocationData';
-import LocationSearch from './LocationSearch';
+import LocationSearchForm from './LocationSearchForm';
 import Forecast from './Forecast';
 import PropTypes from 'prop-types';
 import {forecastDataPropTypes} from './ForecastData';
@@ -14,15 +15,15 @@ export const forecastPropTypes = {
   isWind: PropTypes.bool.isRequired,
 };
 
-export const contentPropTypes = {
+ContentContainer.propTypes = {
   city: PropTypes.string.isRequired,
   data: PropTypes.shape(forecastDataPropTypes).isRequired,
   forecast: PropTypes.shape(forecastPropTypes).isRequired,
   changeCity: PropTypes.func.isRequired,
   updateGeolocation: PropTypes.func.isRequired,
+  showLocationSearchForm: PropTypes.bool.isRequired,
+  isCityError: PropTypes.bool.isRequired,
 };
-
-ContentContainer.propTypes = contentPropTypes;
 
 function ContentContainer(props) {
   const {
@@ -30,22 +31,31 @@ function ContentContainer(props) {
     data,
     forecast,
     changeCity,
-    updateGeolocation
+    updateGeolocation,
+    showLocationSearchForm,
+    isCityError,
   } = props;
 
   return (
     <>
-      <LocationData
-        locationCity={city}
-        onUpdate={updateGeolocation}
-      />
-      <LocationSearch
-        locationCity={city}
-        onChange={changeCity} />
-      <Forecast
-        data={data}
-        forecast={forecast}
-      />
+      {showLocationSearchForm ? (
+        <LocationSearchForm
+          onFormSubmit={changeCity}
+          isCityError={isCityError} />
+      ) : isCityError ? (
+        <Text>Please update your city data or search some city.</Text>
+      ) : (
+        <View>
+          <LocationData
+            locationCity={city}
+            onUpdate={updateGeolocation}
+          />
+          <Forecast
+            data={data}
+            forecast={forecast}
+          />
+        </View>
+      )}
     </>
   );
 }
