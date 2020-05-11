@@ -39,6 +39,7 @@ function StartScreen() {
     <Container>
       <HeaderContainer
         iconName={showLocationSearchForm ? ICON_CLOSE : ICON_SEARCH}
+        onRefreshButtonPress={updateGeolocation}
         onSearchButtonPress={toggleLocationSearchForm}
       />
       <Content style={styles.container}>

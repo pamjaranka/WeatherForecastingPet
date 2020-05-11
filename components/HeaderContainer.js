@@ -11,16 +11,17 @@ import {
 } from 'native-base';
 import {StyleSheet} from 'react-native';
 import {FONTS, COLORS, PADDING} from '../styles/base';
-import {ICON_CLOSE, ICON_SEARCH} from '../constants/icons';
+import {ICON_CLOSE, ICON_SEARCH, ICON_REFRESH} from '../constants/icons';
 import PropTypes from 'prop-types';
 
 HeaderContainer.propTypes = {
   iconName: PropTypes.oneOf([ICON_CLOSE, ICON_SEARCH]).isRequired,
   onSearchButtonPress: PropTypes.func.isRequired,
+  onRefreshButtonPress: PropTypes.func.isRequired,
 };
 
 function HeaderContainer(props) {
-  const {iconName, onSearchButtonPress} = props;
+  const {iconName, onRefreshButtonPress, onSearchButtonPress} = props;
   return (
     <Header noLeft transparent>
       <Left>
@@ -31,6 +32,9 @@ function HeaderContainer(props) {
         <Subtitle style={styles.subtitle}>Weather Forecasting Pet</Subtitle>
       </Body>
       <Right>
+        <Button transparent onPress={onRefreshButtonPress}>
+          <Icon name={ICON_REFRESH} style={styles.icon} />
+        </Button>
         <Button transparent onPress={onSearchButtonPress}>
           <Icon name={iconName} style={styles.icon} />
         </Button>

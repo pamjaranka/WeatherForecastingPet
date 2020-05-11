@@ -48,7 +48,6 @@ function ContentContainer(props) {
         <View>
           <LocationData
             locationCity={city}
-            onUpdate={updateGeolocation}
           />
           <Forecast
             data={data}

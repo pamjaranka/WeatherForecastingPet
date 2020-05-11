@@ -15,8 +15,8 @@ export const forecastDataPropTypes = {
   rain: PropTypes.object,
   snow: PropTypes.object,
   wind: PropTypes.shape({
-    speed: PropTypes.number.isRequired,
-    deg: PropTypes.number.isRequired,
+    speed: PropTypes.number,
+    deg: PropTypes.number,
   }).isRequired,
 };
 
@@ -46,8 +46,16 @@ function ForecastData(props) {
       <Text>Description: {description}.</Text>
       <Text>Humidity: {humidity} %.</Text>
       <Text>Pressure: {pressure} hpa.</Text>
-      <Text>Wind speed: {wind.speed} meter/sec.</Text>
-      <Text>Wind deg: {wind.deg}.</Text>
+      {wind && wind.speed ? (
+        <Text>Wind speed: {wind.speed} meter/sec.</Text>
+      ) : (
+        <></>
+      )}
+      {wind && wind.deg ? (
+        <Text>Wind deg: {wind.deg}.</Text>
+      ) : (
+        <></>
+      )}
       <Text>Clouds: {clouds} %.</Text>
     </View>
   );
