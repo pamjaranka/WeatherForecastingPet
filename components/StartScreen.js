@@ -9,7 +9,9 @@ import useTimeoutWait from '../hooks/useTimeoutWait';
 import useData from '../hooks/useData';
 import useWeatherPhrases from '../hooks/useWeatherPhrases';
 import {PADDING} from '../styles/base';
-import {ICON_CLOSE, ICON_SEARCH} from '../constants/icons';
+import CloseButton from './CloseButton';
+import RefreshButton from './RefreshButton';
+import SearchButton from './SearchButton';
 
 function StartScreen() {
   const [showLocationSearchForm, setShowLocationSearchForm] = useState(false);
@@ -38,14 +40,15 @@ function StartScreen() {
   const weatherPhrase = useWeatherPhrases('Good boy!', forecast);
   // console.log('weatherPhrase');
   // console.log(weatherPhrase);
-
+  const closeButton = <CloseButton onPress={hideForm} />;
+  const refreshButton = <RefreshButton onPress={updateGeolocation} />;
+  const searchButton = <SearchButton onPress={showForm} />;
   return (
     <Container>
       <HeaderContainer
-        onRefreshButtonPress={updateGeolocation}
-        onCloseButtonPress={hideForm}
-        onSearchButtonPress={showForm}
-        showLocationSearchForm={showLocationSearchForm}
+        closeButton={closeButton}
+        refreshButton={refreshButton}
+        searchButton={showLocationSearchForm ? closeButton : searchButton}
       />
       <Content style={styles.container}>
         {wait || isLoading ? (
