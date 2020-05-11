@@ -26,3 +26,14 @@ export const FONTS = {
   serif: 'RobotoSlab-Regular',
   serifBold: 'RobotoSlab-Black',
 };
+
+export const ICON_STYLES = {
+  color: COLORS.blue,
+  fontSize: 30,
+  marginLeft: 0,
+  marginRight: 0,
+  paddingBottom: 0,
+  paddingTop: 0,
+  paddingLeft: 0,
+  paddingRight: 0,
+};

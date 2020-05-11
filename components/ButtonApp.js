@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, Icon} from 'native-base';
-import {COLORS} from '../styles/base';
+import {COLORS, ICON_STYLES} from '../styles/base';
 import {StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -21,14 +21,7 @@ function ButtonApp(props) {
 
 const styles = StyleSheet.create({
   icon: {
-    color: COLORS.blue,
-    fontSize: 30,
-    marginLeft: 0,
-    marginRight: 0,
-    paddingBottom: 0,
-    paddingTop: 0,
-    paddingLeft: 0,
-    paddingRight: 0,
+    ...ICON_STYLES,
     width: 26,
   },
 });

@@ -9,13 +9,15 @@ import {
   Subtitle,
 } from 'native-base';
 import {StyleSheet} from 'react-native';
-import {FONTS} from '../styles/base';
+import {FONTS, ICON_STYLES} from '../styles/base';
 import PropTypes from 'prop-types';
 
-HeaderContainer.propTypes = {
+export const buttonsPropTypes = {
   refreshButton: PropTypes.element.isRequired,
   searchButton: PropTypes.element.isRequired,
 };
+
+HeaderContainer.propTypes = buttonsPropTypes;
 
 function HeaderContainer(props) {
   const {
@@ -51,6 +53,7 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.primary,
     fontSize: FONTS.xs,
   },
+  icon: ICON_STYLES,
 });
 
 export default HeaderContainer;
