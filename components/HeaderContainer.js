@@ -10,18 +10,26 @@ import {
   Subtitle,
 } from 'native-base';
 import {StyleSheet} from 'react-native';
-import {FONTS, COLORS, PADDING} from '../styles/base';
-import {ICON_CLOSE, ICON_SEARCH, ICON_REFRESH} from '../constants/icons';
+import CloseButton from './CloseButton';
+import RefreshButton from './RefreshButton';
+import SearchButton from './SearchButton';
+import {FONTS, COLORS} from '../styles/base';
 import PropTypes from 'prop-types';
 
 HeaderContainer.propTypes = {
-  iconName: PropTypes.oneOf([ICON_CLOSE, ICON_SEARCH]).isRequired,
+  onCloseButtonPress: PropTypes.func.isRequired,
   onSearchButtonPress: PropTypes.func.isRequired,
   onRefreshButtonPress: PropTypes.func.isRequired,
+  showLocationSearchForm: PropTypes.bool.isRequired,
 };
 
 function HeaderContainer(props) {
-  const {iconName, onRefreshButtonPress, onSearchButtonPress} = props;
+  const {
+    onCloseButtonPress,
+    onRefreshButtonPress,
+    onSearchButtonPress,
+    showLocationSearchForm,
+  } = props;
   return (
     <Header noLeft transparent>
       <Left>
@@ -32,12 +40,12 @@ function HeaderContainer(props) {
         <Subtitle style={styles.subtitle}>Weather Forecasting Pet</Subtitle>
       </Body>
       <Right>
-        <Button transparent onPress={onRefreshButtonPress}>
-          <Icon name={ICON_REFRESH} style={styles.icon} />
-        </Button>
-        <Button transparent onPress={onSearchButtonPress}>
-          <Icon name={iconName} style={styles.icon} />
-        </Button>
+        <RefreshButton onPress={onRefreshButtonPress} />
+        {showLocationSearchForm ? (
+          <CloseButton onPress={onCloseButtonPress} />
+        ) : (
+          <SearchButton onPress={onSearchButtonPress} />
+        )}
       </Right>
     </Header>
   );
@@ -54,14 +62,6 @@ const styles = StyleSheet.create({
   subtitle: {
     fontFamily: FONTS.primary,
     fontSize: FONTS.xs,
-  },
-  icon: {
-    color: COLORS.blue,
-    fontSize: 30,
-    paddingBottom: 0,
-    paddingTop: 0,
-    paddingLeft: 0,
-    paddingRight: 0,
   },
 });
 

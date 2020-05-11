@@ -16,13 +16,17 @@ function StartScreen() {
   const wait = useTimeoutWait({delay: 3000});
   const {state, changeCity, updateGeolocation} = useData();
 
-  const toggleLocationSearchForm = () => {
-    setShowLocationSearchForm(!showLocationSearchForm);
+  const showForm = () => {
+    setShowLocationSearchForm(true);
+  };
+
+  const hideForm = () => {
+    setShowLocationSearchForm(false);
   };
 
   const {
     isError,
-    isLoaded,
+    // isLoaded,
     isLoading,
     isCityError,
     data,
@@ -38,9 +42,10 @@ function StartScreen() {
   return (
     <Container>
       <HeaderContainer
-        iconName={showLocationSearchForm ? ICON_CLOSE : ICON_SEARCH}
         onRefreshButtonPress={updateGeolocation}
-        onSearchButtonPress={toggleLocationSearchForm}
+        onCloseButtonPress={hideForm}
+        onSearchButtonPress={showForm}
+        showLocationSearchForm={showLocationSearchForm}
       />
       <Content style={styles.container}>
         {wait || isLoading ? (
