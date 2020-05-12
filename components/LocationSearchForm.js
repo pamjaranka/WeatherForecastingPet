@@ -6,16 +6,16 @@ import {SEARCH_CITY_ERROR} from '../constants/erors';
 import PropTypes from 'prop-types';
 
 LocationSearchForm.propTypes = {
-  onFormSubmit: PropTypes.func.isRequired,
+  onSearchFormSubmit: PropTypes.func.isRequired,
   isCityError: PropTypes.bool.isRequired,
 };
 
 function LocationSearchForm(props) {
-  const {onFormSubmit, isCityError} = props;
+  const {onSearchFormSubmit, isCityError} = props;
   const [query, setQuery] = useState('');
 
   console.log('LocationSearchForm');
-
+  console.log(props);
   return (
     <Form>
       <Item error={isCityError} floatingLabel style={styles.input}>
@@ -31,7 +31,7 @@ function LocationSearchForm(props) {
       <Button
         style={styles.button}
         onPress={() => {
-          onFormSubmit(query);
+          onSearchFormSubmit(query);
         }}>
         <Text style={styles.buttonText}>Search</Text>
       </Button>

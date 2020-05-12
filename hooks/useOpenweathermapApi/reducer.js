@@ -13,6 +13,7 @@ export default (state, {type, payload}) => {
     case FETCH_START:
       return {
         ...state,
+        dataApi: null,
         isLoading: true,
         isError: false,
         searchCityError: false,
@@ -43,8 +44,9 @@ export default (state, {type, payload}) => {
     case FETCH_SET_OPTIONS:
       return {
         ...state,
-        isLoading: false,
+        isLoading: true,
         isError: false,
+        // dataApi: null,
         searchCityError: false,
         options: payload,
       };

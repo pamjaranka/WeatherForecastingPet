@@ -13,17 +13,16 @@ import {FONTS, ICON_STYLES} from '../styles/base';
 import PropTypes from 'prop-types';
 
 export const buttonsPropTypes = {
-  refreshButton: PropTypes.element.isRequired,
-  searchButton: PropTypes.element.isRequired,
+  headerButtonFirst: PropTypes.element.isRequired,
+  headerButtonSecond: PropTypes.element.isRequired,
 };
 
 HeaderContainer.propTypes = buttonsPropTypes;
 
 function HeaderContainer(props) {
-  const {
-    refreshButton,
-    searchButton,
-  } = props;
+  console.log('HeaderContainer');
+  const {headerButtonFirst, headerButtonSecond} = props;
+
   return (
     <Header noLeft transparent>
       <Left>
@@ -34,8 +33,8 @@ function HeaderContainer(props) {
         <Subtitle style={styles.subtitle}>Weather Forecasting Pet</Subtitle>
       </Body>
       <Right>
-        {refreshButton}
-        {searchButton}
+        {headerButtonFirst}
+        {headerButtonSecond}
       </Right>
     </Header>
   );

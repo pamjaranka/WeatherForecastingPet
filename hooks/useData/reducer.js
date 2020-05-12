@@ -12,6 +12,7 @@ export default (state, {type, payload}) => {
     case SET_DATA_START:
       return {
         ...state,
+        data: null,
         isLoading: true,
         isLoaded: false,
         isCityError: false,
