@@ -3,7 +3,7 @@ import {ScrollView, StyleSheet, Text} from 'react-native';
 import {Content} from 'native-base';
 import ContentContainer from '../components/ContentContainer';
 import FooterContainer from '../components/FooterContainer';
-import {COLORS, PADDING, CONTAINER_STYLES} from '../styles/base';
+import {COLORS} from '../styles/base';
 import useWeatherPhrases from '../hooks/useWeatherPhrases';
 
 function HomeScreen({route}) {
@@ -13,7 +13,6 @@ function HomeScreen({route}) {
     isError,
     isLoaded,
     isLoading,
-    isCityError,
     data,
     city,
     forecast,
@@ -47,7 +46,9 @@ function HomeScreen({route}) {
 }
 
 const styles = StyleSheet.create({
-  container: CONTAINER_STYLES,
+  container: {
+    backgroundColor: COLORS.lightGrey,
+  },
 });
 
 export default HomeScreen;

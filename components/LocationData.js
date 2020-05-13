@@ -1,8 +1,7 @@
 import React from 'react';
 import {Text, View, Button, StyleSheet} from 'react-native';
-import {H1} from 'native-base';
 import PropTypes from 'prop-types';
-import {FONTS, PADDING, COLORS} from '../styles/base';
+import {FONTS, PADDING, COLORS, HOME_CONTAINER_STYLES} from '../styles/base';
 
 LocationData.propTypes = {
   locationCity: PropTypes.string.isRequired,
@@ -13,7 +12,7 @@ function LocationData(props) {
   console.log('LocationData')
 
   return (
-    <View>
+    <View style={styles.container}>
       <Text style={styles.title}>{locationCity}</Text>
       <Text style={styles.subtitle}>(the city)</Text>
     </View>
@@ -21,13 +20,14 @@ function LocationData(props) {
 }
 
 const styles = StyleSheet.create({
+  container: HOME_CONTAINER_STYLES,
   titleContainer: {
     borderBottomColor: COLORS.grey,
     borderBottomWidth: 4,
   },
   title: {
     fontFamily: FONTS.serifBold,
-    fontSize: FONTS.lg,
+    fontSize: FONTS.xxl,
   },
   subtitle: {
     color: COLORS.grey,

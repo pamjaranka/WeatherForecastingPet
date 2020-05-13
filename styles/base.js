@@ -9,6 +9,8 @@ export const PADDING = {
 
 export const COLORS = {
   black: '#100B00',
+  darkGrey: '#727273',
+  lightGrey: '#E9F2F4',
   grey: '#737B8F',
   blue: '#13b6d1',
   red: '#DB162F',
@@ -18,8 +20,11 @@ export const COLORS = {
 export const FONTS = {
   xs: 12,
   sm: 14,
-  md: 18,
-  lg: 28,
+  md: 16,
+  lg: 18,
+  xl: 22,
+  xxl: 28,
+  xxxl: 50,
   primary: 'Roboto-Regular',
   bold: 'Roboto-Bold',
   italic: 'Roboto-Italic',
@@ -41,6 +46,13 @@ export const ICON_STYLES = {
 
 export const CONTAINER_STYLES = {
   backgroundColor: COLORS.white,
+  paddingLeft: PADDING.md,
+  paddingRight: PADDING.md,
+  paddingTop: PADDING.lg,
+};
+
+export const HOME_CONTAINER_STYLES = {
+  backgroundColor: COLORS.lightGrey,
   paddingLeft: PADDING.md,
   paddingRight: PADDING.md,
   paddingTop: PADDING.lg,

@@ -1,6 +1,5 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import {PADDING} from '../styles/base';
+import {View} from 'react-native';
 import {forecastPropTypes} from './ContentContainer';
 import ForecastData, {forecastDataPropTypes} from './ForecastData';
 import ForecastPet from './ForecastPet';
@@ -27,17 +26,11 @@ function Forecast(props) {
   console.log(pet);
 
   return (
-    <View style={styles.container}>
+    <View>
       <ForecastData {...data} />
       <ForecastPet pet={pet} />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    padding: PADDING.md,
-  },
-});
 
 export default Forecast;

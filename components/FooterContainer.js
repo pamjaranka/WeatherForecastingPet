@@ -18,14 +18,14 @@ function FooterContainer(props) {
 
 const styles = StyleSheet.create({
   footer: {
-    backgroundColor: COLORS.blue,
+    backgroundColor: COLORS.lightGrey,
     borderTopWidth: 0,
     padding: PADDING.sm,
   },
   title: {
     fontFamily: FONTS.italic,
-    fontSize: FONTS.md,
-    color: COLORS.white,
+    fontSize: FONTS.lg,
+    color: COLORS.grey,
   },
 });
 

@@ -23,6 +23,8 @@ import RefreshButton from './components/RefreshButton';
 import useTimeoutWait from './hooks/useTimeoutWait';
 import Loading from './components/Loading';
 import {navigateTo} from './utils/navigate';
+import {COLORS} from './styles/base';
+import {StyleSheet} from 'react-native';
 
 function App() {
   console.log('APP');
@@ -77,7 +79,7 @@ function App() {
   // };
 
   return (
-    <Container>
+    <Container style={styles.container}>
       {!isFirstLoaded || wait ? (
         <Loading />
       ) : (
@@ -101,5 +103,11 @@ function App() {
     </Container>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: COLORS.lightGrey,
+  }
+});
 
 export default App;
