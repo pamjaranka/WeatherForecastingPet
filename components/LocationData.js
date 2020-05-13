@@ -13,7 +13,7 @@ function LocationData(props) {
   console.log('LocationData')
 
   return (
-    <View style={styles.container}>
+    <View>
       <Text style={styles.title}>{locationCity}</Text>
       <Text style={styles.subtitle}>(the city)</Text>
     </View>
@@ -21,9 +21,6 @@ function LocationData(props) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    paddingTop: PADDING.lg,
-  },
   titleContainer: {
     borderBottomColor: COLORS.grey,
     borderBottomWidth: 4,

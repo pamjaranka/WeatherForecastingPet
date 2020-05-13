@@ -10,7 +10,7 @@ function ForecastPet(props) {
       <Text>{`Window Dimensions: height - ${window.height}, width - ${
         window.width
       }`}</Text>
-      <ForecastPetImage {...props} />
+      {props.pet ? <ForecastPetImage {...props} /> : <></>}
     </View>
   );
 }

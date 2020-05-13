@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Text, Form, Item, Input, Icon, Label, Button} from 'native-base';
+import {Text, Form, Item, Input, Spinner, Label, Button} from 'native-base';
 import {StyleSheet} from 'react-native';
 import {FONTS, COLORS, PADDING} from '../styles/base';
 import {SEARCH_CITY_ERROR} from '../constants/erors';
@@ -7,11 +7,12 @@ import PropTypes from 'prop-types';
 
 LocationSearchForm.propTypes = {
   onSearchFormSubmit: PropTypes.func.isRequired,
+  isCityLoading: PropTypes.bool.isRequired,
   isCityError: PropTypes.bool.isRequired,
 };
 
 function LocationSearchForm(props) {
-  const {onSearchFormSubmit, isCityError} = props;
+  const {onSearchFormSubmit, isCityLoading, isCityError} = props;
   const [query, setQuery] = useState('');
 
   console.log('LocationSearchForm');
@@ -33,7 +34,11 @@ function LocationSearchForm(props) {
         onPress={() => {
           onSearchFormSubmit(query);
         }}>
-        <Text style={styles.buttonText}>Search</Text>
+        {isCityLoading ? (
+          <Spinner color={COLORS.white} />
+        ) : (
+          <Text style={styles.buttonText}>Search</Text>
+        )}
       </Button>
     </Form>
   );

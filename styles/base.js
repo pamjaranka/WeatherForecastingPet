@@ -4,6 +4,7 @@ export const PADDING = {
   md: 20,
   lg: 30,
   xl: 40,
+  xxl: 80,
 };
 
 export const COLORS = {
@@ -36,4 +37,11 @@ export const ICON_STYLES = {
   paddingTop: 0,
   paddingLeft: 0,
   paddingRight: 0,
+};
+
+export const CONTAINER_STYLES = {
+  backgroundColor: COLORS.white,
+  paddingLeft: PADDING.md,
+  paddingRight: PADDING.md,
+  paddingTop: PADDING.lg,
 };

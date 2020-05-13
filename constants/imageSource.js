@@ -10,8 +10,7 @@ import {
   TEMP_WARM,
 } from './forecast';
 
-export const IMAGE_PATH = '../assets/images/';
-export const IMAGE_EXTENSION = 'gif';
+export const IMAGE_ERROR = `${PET_DOG}_error`;
 
 export const IMAGE_SOURCE = {
   [`${PET_DOG}${TEMP_HOT}`]: require('../assets/images/dog_hot.gif'),
@@ -38,4 +37,5 @@ export const IMAGE_SOURCE = {
   [`${PET_DOG}${TEMP_FROSTY}${SUNNY}`]: require('../assets/images/dog_frosty_sunny.gif'),
   [`${PET_DOG}${TEMP_FROSTY}${SUNNY}${RAIN}`]: require('../assets/images/dog_frosty_sunny_rain.gif'),
   [`${PET_DOG}${TEMP_FROSTY}${SUNNY}${SNOW}`]: require('../assets/images/dog_frosty_sunny_snow.gif'),
+  [`${IMAGE_ERROR}`]: require('../assets/images/dog_error.gif'),
 };

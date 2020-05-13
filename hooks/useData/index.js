@@ -3,7 +3,13 @@ import useGeolocation from '../useGeolocation';
 import useOpenweathermapApi from '../useOpenweathermapApi';
 import reducer from './reducer';
 import {fetchSetOptions} from '../useOpenweathermapApi/actionCreators';
-import {setCityFail, setDataFail, setDataStart, setDataSuccess} from './actionCreators';
+import {
+  setCityFail,
+  setDataFail,
+  setDataFirst,
+  setDataStart,
+  setDataSuccess,
+} from './actionCreators';
 import {
   TEMP_COLD,
   TEMP_FROSTY,
@@ -62,14 +68,15 @@ const setForecast = data => {
 export default () => {
   const [state, dispatch] = useReducer(reducer, {
     isLoading: false,
-    // isLoaded: false,
+    isFirstLoaded: false,
+    isLoaded: false,
     isCityError: false,
     isError: false,
     data: null,
     forecast: null,
     city: null,
   });
-  // console.log('useData');
+  console.log('useData');
 
   const setCoorsOptions = () => {
     dispatchData(fetchSetOptions(stateGeolocation.coors));
@@ -79,8 +86,9 @@ export default () => {
   const [data, dispatchData, changeCity] = useOpenweathermapApi();
   console.log('!!!!!!');
   console.log(data);
+  console.log(stateGeolocation);
   useEffect(() => {
-    // console.log('useData WILL CHANGE');
+    console.log('useData WILL CHANGE');
     // console.log(data);
     dispatch(setDataStart());
 
@@ -102,13 +110,18 @@ export default () => {
           forecast: forecast,
         }),
       );
+
+      console.log(`after success ${state.isFirstLoaded}`);
+
+      if (!state.isFirstLoaded) {
+        dispatch(setDataFirst());
+      }
     } else if (data.searchCityError) {
-      console.log('CITY ERRROR')
       dispatch(setCityFail());
     } else if (stateGeolocation.isError || data.isError) {
       dispatch(setDataFail());
     }
-  }, [data.dataApi, data.isError, stateGeolocation.isError]);
+  }, [data.dataApi, data.isError, /*data.isLoading*/, stateGeolocation.isError]);
 
   return {state, changeCity, updateGeolocation};
 };

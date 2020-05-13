@@ -1,12 +1,12 @@
 import React from 'react';
-import {ScrollView, StyleSheet, Text, View, Button} from 'react-native';
+import {ScrollView, StyleSheet, Text} from 'react-native';
 import {Content} from 'native-base';
 import ContentContainer from '../components/ContentContainer';
 import FooterContainer from '../components/FooterContainer';
-import {COLORS, PADDING} from '../styles/base';
+import {COLORS, PADDING, CONTAINER_STYLES} from '../styles/base';
 import useWeatherPhrases from '../hooks/useWeatherPhrases';
 
-function HomeScreen({navigation, route}) {
+function HomeScreen({route}) {
   console.log('HomeScreen');
   console.log(route);
   const {
@@ -24,8 +24,10 @@ function HomeScreen({navigation, route}) {
 
   return (
     <>
-      {isLoading ? (
+      {isLoading || !isLoaded ? (
         <Text>Loading...</Text>
+      ) : isError ? (
+        <Text>Something went wrong...</Text>
       ) : (
         <>
           <Content style={styles.container}>
@@ -45,11 +47,7 @@ function HomeScreen({navigation, route}) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: COLORS.white,
-    paddingLeft: PADDING.md,
-    paddingRight: PADDING.md,
-  },
+  container: CONTAINER_STYLES,
 });
 
 export default HomeScreen;

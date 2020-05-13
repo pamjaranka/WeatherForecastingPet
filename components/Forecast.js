@@ -6,6 +6,7 @@ import ForecastData, {forecastDataPropTypes} from './ForecastData';
 import ForecastPet from './ForecastPet';
 import {PET_DOG} from '../constants/forecast';
 import PropTypes from 'prop-types';
+import usePet from '../hooks/usePet';
 
 Forecast.propTypes = {
   data: PropTypes.shape(forecastDataPropTypes).isRequired,
@@ -17,12 +18,18 @@ function Forecast(props) {
     data,
     forecast,
   } = props;
-  // console.log('Forecast');
+
+  const pet = usePet({
+    forecast: forecast,
+    petInit: PET_DOG,
+  });
+  console.log('Forecast');
+  console.log(pet);
 
   return (
     <View style={styles.container}>
       <ForecastData {...data} />
-      <ForecastPet petInit={PET_DOG} forecast={forecast} />
+      <ForecastPet pet={pet} />
     </View>
   );
 }

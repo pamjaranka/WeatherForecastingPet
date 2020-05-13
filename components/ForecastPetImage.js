@@ -1,21 +1,27 @@
 import React from 'react';
-import {Text, Image, StyleSheet} from 'react-native';
-import usePet, {usePetPropTypes} from '../hooks/usePet';
+import {Image, StyleSheet} from 'react-native';
 import {IMAGE_SOURCE} from '../constants/imageSource';
+import PropTypes from 'prop-types';
 
-ForecastPetImage.propTypes = usePetPropTypes;
+ForecastPetImage.propTypes = {
+  pet: PropTypes.string.isRequired,
+};
 
 function ForecastPetImage(props) {
-  const pet = usePet(props);
+  const {pet} = props;
+  console.log('ForecastPetImage');
+  console.log(pet);
 
   return (
     <>
-      {pet ?
+      {pet && IMAGE_SOURCE[pet] ? (
         <Image
           style={styles.image}
           source={IMAGE_SOURCE[pet]}
         />
-        : <Text>111</Text>}
+      ) : (
+        <></>
+      )}
     </>
   );
 }

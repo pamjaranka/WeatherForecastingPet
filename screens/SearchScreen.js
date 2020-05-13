@@ -6,11 +6,10 @@ import LocationSearchForm from '../components/LocationSearchForm';
 
 function SearchScreen({navigation, route}) {
   console.log('SearchScreen');
-  const {isCityError, onSearchFormSubmit} = route.params;
 
   return (
     <Content style={styles.container}>
-      <LocationSearchForm isCityError={isCityError} onSearchFormSubmit={onSearchFormSubmit} />
+      <LocationSearchForm {...route.params} />
     </Content>
   );
 }
