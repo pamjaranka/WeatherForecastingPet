@@ -6,7 +6,6 @@ import {fetchSetOptions} from '../useOpenweathermapApi/actionCreators';
 import {
   setCityFail,
   setDataFail,
-  setDataFirst,
   setDataStart,
   setDataSuccess,
 } from './actionCreators';
@@ -68,8 +67,6 @@ const setForecast = data => {
 export default () => {
   const [state, dispatch] = useReducer(reducer, {
     isLoading: false,
-    isFirstLoaded: false,
-    isLoaded: false,
     isCityError: false,
     isError: false,
     data: null,
@@ -84,12 +81,12 @@ export default () => {
 
   const [stateGeolocation, updateGeolocation] = useGeolocation(setCoorsOptions);
   const [data, dispatchData, changeCity] = useOpenweathermapApi();
-  console.log('!!!!!!');
-  console.log(data);
-  console.log(stateGeolocation);
+  // console.log('!!!!!!');
+  // console.log(data);
+  // console.log(stateGeolocation);
   useEffect(() => {
     console.log('useData WILL CHANGE');
-    // console.log(data);
+    console.log(data);
     dispatch(setDataStart());
 
     if (data && data.dataApi && data.dataApi[0]) {
@@ -110,18 +107,12 @@ export default () => {
           forecast: forecast,
         }),
       );
-
-      console.log(`after success ${state.isFirstLoaded}`);
-
-      if (!state.isFirstLoaded) {
-        dispatch(setDataFirst());
-      }
     } else if (data.searchCityError) {
       dispatch(setCityFail());
     } else if (stateGeolocation.isError || data.isError) {
       dispatch(setDataFail());
     }
-  }, [data.dataApi, data.isError, /*data.isLoading*/, stateGeolocation.isError]);
+  }, [data.dataApi, data.isError, stateGeolocation.isError]);
 
   return {state, changeCity, updateGeolocation};
 };

@@ -3,6 +3,7 @@ import {ScrollView, StyleSheet, Text} from 'react-native';
 import {Content} from 'native-base';
 import ContentContainer from '../components/ContentContainer';
 import FooterContainer from '../components/FooterContainer';
+import LoadingHome from '../components/LoadingHome';
 import {COLORS} from '../styles/base';
 import useWeatherPhrases from '../hooks/useWeatherPhrases';
 
@@ -11,7 +12,6 @@ function HomeScreen({route}) {
   console.log(route);
   const {
     isError,
-    isLoaded,
     isLoading,
     data,
     city,
@@ -23,8 +23,8 @@ function HomeScreen({route}) {
 
   return (
     <>
-      {isLoading || !isLoaded ? (
-        <Text>Loading...</Text>
+      {isLoading ? (
+        <LoadingHome />
       ) : isError ? (
         <Text>Something went wrong...</Text>
       ) : (

@@ -12,22 +12,22 @@ export default callback => {
   const [stateGeolocation, dispatchGeolocation] = useReducer(
     reducer,
     {
-    isLoading: false,
-    isError: false,
-    coors: null,
-    updateGeolocation: true,
-  },
+      isLoading: false,
+      isError: false,
+      coors: null,
+      updateGeolocation: true,
+    },
   );
 
   const updateGeolocation = () => {
     dispatchGeolocation(geolocationUpdate(true));
   };
 
-  // console.log('useGeolocation (stateGeolocation)');
+  console.log('useGeolocation (stateGeolocation)');
   // console.log(stateGeolocation);
 
   useEffect(() => {
-    // console.log('useGeolocation useEffect');
+    console.log('useGeolocation useEffect');
     // console.log(stateGeolocation);
     let watchId = null;
     async function fetchGeolocation() {

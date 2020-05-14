@@ -9,7 +9,7 @@ import {
   Subtitle,
 } from 'native-base';
 import {StyleSheet} from 'react-native';
-import {FONTS, ICON_STYLES} from '../styles/base';
+import {FONTS, ICON_STYLES, PADDING} from '../styles/base';
 import PropTypes from 'prop-types';
 
 export const buttonsPropTypes = {
@@ -24,7 +24,7 @@ function HeaderContainer(props) {
   const {headerButtonFirst, headerButtonSecond} = props;
 
   return (
-    <Header noLeft transparent>
+    <Header noLeft transparent style={styles.container}>
       <Left>
         <Icon type="FontAwesome5" name="paw" style={styles.icon} />
       </Left>
@@ -41,6 +41,9 @@ function HeaderContainer(props) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    paddingBottom: PADDING.sm,
+  },
   body: {
     flexGrow: 2,
   },

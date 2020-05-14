@@ -13,13 +13,12 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {forecastPropTypes} from '../components/ContentContainer';
 import {forecastDataPropTypes} from '../components/ForecastData';
-import {navigateTo, setParamsTo} from '../utils/navigate';
 import PropTypes from 'prop-types';
 
 Navigation.propTypes = {
   refObj: PropTypes.object.isRequired,
   onStateChange: PropTypes.func.isRequired,
-  changeCity: PropTypes.func.isRequired,
+  onSearchFormSubmit: PropTypes.func.isRequired,
   refreshButton: PropTypes.element.isRequired,
   searchButton: PropTypes.element.isRequired,
   initialRouteName: PropTypes.oneOf([
@@ -46,47 +45,12 @@ function Navigation(props) {
   const {
     refObj,
     onStateChange,
-    changeCity,
+    onSearchFormSubmit,
     initialRouteName,
     useDataState,
     refreshButton,
     searchButton,
   } = props;
-
-  console.log(initialRouteName);
-
-  const onSearchFormSubmit = query => {
-    setSearchFormLoading(true);
-    changeCity(query);
-  };
-
-  const setSearchFormLoading = isLoading => {
-    setParamsTo(refObj, {
-      isCityLoading: isLoading,
-    });
-  };
-
-  const setSearchFormError = isError => {
-    setParamsTo(refObj, {
-      isCityError: isError,
-    });
-  };
-
-  const goHome = () => {
-    navigateTo(refObj, HOME_SCREEN, {...useDataState});
-  };
-
-  useEffect(() => {
-    console.log(`CITY CHANGE ${useDataState.city}`);
-    console.log(useDataState);
-    setSearchFormLoading(false);
-    if (useDataState.city && !useDataState.isCityError) {
-      setSearchFormError(false);
-      goHome();
-    } else if (useDataState.isCityError) {
-      setSearchFormError(true);
-    }
-  }, [useDataState.city, useDataState.isCityError]);
 
   return (
     <NavigationContainer

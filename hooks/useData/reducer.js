@@ -1,7 +1,6 @@
 import {
   SET_CITY_FAIL,
   SET_DATA_FAIL,
-  SET_DATA_FIRST,
   SET_DATA_START,
   SET_DATA_SUCCESS,
 } from './actionTypes';
@@ -10,17 +9,11 @@ export default (state, {type, payload}) => {
   console.log(type);
   console.log(payload);
   switch (type) {
-    case SET_DATA_FIRST:
-      return {
-        ...state,
-        isFirstLoaded: true,
-      };
     case SET_DATA_START:
       return {
         ...state,
         data: null,
         isLoading: true,
-        isLoaded: false,
         isCityError: false,
         isError: false,
       };
@@ -28,7 +21,6 @@ export default (state, {type, payload}) => {
       return {
         ...state,
         isLoading: false,
-        isLoaded: true,
         isCityError: false,
         isError: false,
         city: payload.city,
@@ -39,7 +31,6 @@ export default (state, {type, payload}) => {
       return {
         ...state,
         isLoading: false,
-        isLoaded: false,
         isCityError: false,
         isError: true,
         city: null,
@@ -50,7 +41,6 @@ export default (state, {type, payload}) => {
       return {
         ...state,
         isLoading: false,
-        isLoaded: false,
         isCityError: true,
         isError: true,
         city: null,

@@ -20,9 +20,8 @@ import useData from './hooks/useData';
 import CloseButton from './components/CloseButton';
 import SearchButton from './components/SearchButton';
 import RefreshButton from './components/RefreshButton';
-import useTimeoutWait from './hooks/useTimeoutWait';
-import Loading from './components/Loading';
-import {navigateTo} from './utils/navigate';
+// import useTimeoutWait from './hooks/useTimeoutWait';
+import {navigateTo, setParamsTo} from './utils/navigate';
 import {COLORS} from './styles/base';
 import {StyleSheet} from 'react-native';
 
@@ -31,16 +30,11 @@ function App() {
   const ref = useRef(null);
   const {state, changeCity, updateGeolocation} = useData();
   const [searchScreenFocused, setSearchScreenFocused] = useState(false);
-  const wait = useTimeoutWait({delay: 3000});
+  // const wait = useTimeoutWait({delay: 3000});
   const {
     isError,
-    isLoaded,
-    isLoading,
-    isFirstLoaded,
     isCityError,
-    data,
     city,
-    forecast,
   } = state;
 
   console.log('APP state');
@@ -55,10 +49,6 @@ function App() {
     navigateTo(ref, HOME_SCREEN, {
       isLoading: true,
     });
-    // ref.current &&
-    //   ref.current.navigate(HOME_SCREEN, {
-    //     isLoading: true,
-    //   });
   };
 
   const onCloseButtonPress = () => {
@@ -78,28 +68,54 @@ function App() {
   //     : HOME_SCREEN;
   // };
 
+  const onSearchFormSubmit = query => {
+    setSearchFormLoading(true);
+    changeCity(query);
+  };
+
+  const setSearchFormLoading = loading => {
+    setParamsTo(ref, {
+      isCityLoading: loading,
+    });
+  };
+
+  const setSearchFormError = error => {
+    setParamsTo(ref, {
+      isCityError: error,
+    });
+  };
+
+  const goHome = () => {
+    navigateTo(ref, HOME_SCREEN, {...state});
+  };
+
+  useEffect(() => {
+    console.log(`CITY CHANGE ${city}`);
+    console.log(state);
+    setSearchFormLoading(false);
+    if (city && !isCityError) {
+      setSearchFormError(false);
+      goHome();
+    } else if (isCityError) {
+      setSearchFormError(true);
+    }
+  }, [city, isCityError]);
+
   return (
     <Container style={styles.container}>
-      {!isFirstLoaded || wait ? (
-        <Loading />
-      ) : (
-        <>
-          <HeaderContainer
-            headerButtonFirst={refreshButton}
-            headerButtonSecond={headerButtonSecond} />
-          <Navigation
-            refObj={ref}
-            onStateChange={sendState}
-            // initialRouteName={getRouteName()}
-            initialRouteName={HOME_SCREEN}
-            useDataState={state}
-            changeCity={changeCity}
-            refreshButton={refreshButton}
-            searchButton={searchButton}
-            // onSearchFormSubmit={onSearchFormSubmit}
-          />
-        </>
-      )}
+      <HeaderContainer
+        headerButtonFirst={refreshButton}
+        headerButtonSecond={headerButtonSecond} />
+      <Navigation
+        refObj={ref}
+        onStateChange={sendState}
+        // initialRouteName={getRouteName()}
+        initialRouteName={LOADING_SCREEN}
+        useDataState={state}
+        refreshButton={refreshButton}
+        searchButton={searchButton}
+        onSearchFormSubmit={onSearchFormSubmit}
+      />
     </Container>
   );
 }
