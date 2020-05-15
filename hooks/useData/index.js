@@ -69,11 +69,13 @@ export default () => {
     isLoading: false,
     isCityError: false,
     isError: false,
-    data: null,
+    currentData: null,
+    forecastData: null,
     forecast: null,
     city: null,
   });
   console.log('useData');
+  console.log(state);
 
   const setCoorsOptions = () => {
     dispatchData(fetchSetOptions(stateGeolocation.coors));
@@ -81,6 +83,19 @@ export default () => {
 
   const [stateGeolocation, updateGeolocation] = useGeolocation(setCoorsOptions);
   const [data, dispatchData, changeCity] = useOpenweathermapApi();
+
+  const getData = d => {
+    return {
+      main: d[0].weather[0].main,
+      description: d[0].weather[0].description,
+      wind: d[0].wind,
+      clouds: d[0].clouds.all,
+      rain: d[0].rain,
+      snow: d[0].snow,
+      ...d[0].main,
+    };
+  };
+
   // console.log('!!!!!!');
   // console.log(data);
   // console.log(stateGeolocation);
@@ -89,21 +104,14 @@ export default () => {
     console.log(data);
     dispatch(setDataStart());
 
-    if (data && data.dataApi && data.dataApi[0]) {
-      const setData = {
-        main: data.dataApi[0].weather[0].main,
-        description: data.dataApi[0].weather[0].description,
-        wind: data.dataApi[0].wind,
-        clouds: data.dataApi[0].clouds.all,
-        rain: data.dataApi[0].rain,
-        snow: data.dataApi[0].snow,
-        ...data.dataApi[0].main,
-      };
-      const forecast = setForecast(setData);
+    if (data && data.currentData && data.currentData[0]) {
+      const currentData = getData(data.currentData);
+      const forecast = setForecast(currentData);
       dispatch(
         setDataSuccess({
-          city: data.dataApi[0].name,
-          data: setData,
+          city: data.currentData[0].name,
+          currentData: currentData,
+          forecastData: data.forecastData,
           forecast: forecast,
         }),
       );
@@ -112,7 +120,7 @@ export default () => {
     } else if (stateGeolocation.isError || data.isError) {
       dispatch(setDataFail());
     }
-  }, [data.dataApi, data.isError, stateGeolocation.isError]);
+  }, [data.currentData, data.isError, stateGeolocation.isError]);
 
   return {state, changeCity, updateGeolocation};
 };

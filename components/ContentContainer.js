@@ -16,14 +16,14 @@ export const forecastPropTypes = {
 
 ContentContainer.propTypes = {
   city: PropTypes.string.isRequired,
-  data: PropTypes.shape(forecastDataPropTypes).isRequired,
+  currentData: PropTypes.shape(forecastDataPropTypes).isRequired,
   forecast: PropTypes.shape(forecastPropTypes).isRequired,
 };
 
 function ContentContainer(props) {
   const {
     city,
-    data,
+    currentData,
     forecast,
   } = props;
   console.log('ContentContainer');
@@ -34,7 +34,7 @@ function ContentContainer(props) {
         locationCity={city}
       />
       <Forecast
-        data={data}
+        currentData={currentData}
         forecast={forecast}
       />
     </View>

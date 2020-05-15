@@ -9,11 +9,10 @@ import useWeatherPhrases from '../hooks/useWeatherPhrases';
 
 function HomeScreen({route}) {
   console.log('HomeScreen');
-  console.log(route);
   const {
     isError,
     isLoading,
-    data,
+    currentData,
     city,
     forecast,
   } = route.params;
@@ -33,7 +32,7 @@ function HomeScreen({route}) {
             <ScrollView>
               <ContentContainer
                 city={city}
-                data={data}
+                currentData={currentData}
                 forecast={forecast}
               />
             </ScrollView>

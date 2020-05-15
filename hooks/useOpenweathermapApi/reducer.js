@@ -1,54 +1,78 @@
 import {
-  FETCH_FAIL,
-  FETCH_FAIL_CITY,
+  FETCH_CURRENT_FAIL,
+  FETCH_CURRENT_FAIL_CITY,
   FETCH_SET_OPTIONS,
-  FETCH_START,
-  FETCH_SUCCESS,
+  FETCH_CURRENT_START,
+  FETCH_CURRENT_SUCCESS,
+  FETCH_FORECAST_SUCCESS,
+  FETCH_FORECAST_START,
+  FETCH_FORECAST_FAIL,
 } from './actionTypes';
 
 export default (state, {type, payload}) => {
   console.log(type);
   console.log(payload);
   switch (type) {
-    case FETCH_START:
+    case FETCH_CURRENT_START:
       return {
         ...state,
-        dataApi: null,
-        isLoading: true,
-        isError: false,
+        currentData: null,
+        isCurrentLoading: true,
+        isCurrentError: false,
         searchCityError: false,
       };
-    case FETCH_SUCCESS:
+    case FETCH_CURRENT_SUCCESS:
+      return {
+        ...state,
+        isCurrentLoading: false,
+        isCurrentError: false,
+        searchCityError: false,
+        currentData: payload,
+      };
+    case FETCH_CURRENT_FAIL:
+      return {
+        ...state,
+        isCurrentLoading: false,
+        isCurrentError: true,
+        searchCityError: false,
+      };
+    case FETCH_CURRENT_FAIL_CITY:
       return {
         ...state,
         isLoading: false,
-        isError: false,
-        searchCityError: false,
-        dataApi: payload,
-      };
-    case FETCH_FAIL:
-      return {
-        ...state,
-        isLoading: false,
-        isError: true,
-        searchCityError: false,
-      };
-    case FETCH_FAIL_CITY:
-      return {
-        ...state,
-        isLoading: false,
-        isError: true,
-        dataApi: null,
+        isCurrentError: true,
+        currentData: null,
         searchCityError: true,
       };
     case FETCH_SET_OPTIONS:
       return {
         ...state,
         isLoading: true,
-        isError: false,
-        // dataApi: null,
+        isCurrentError: false,
+        // currentData: null,
         searchCityError: false,
         options: payload,
+      };
+    case FETCH_FORECAST_START:
+      return {
+        ...state,
+        forecastData: null,
+        isForecastLoading: true,
+        isForecastError: false,
+      };
+    case FETCH_FORECAST_SUCCESS:
+      return {
+        ...state,
+        isForecastLoading: false,
+        isForecastError: false,
+        searchCityError: false,
+        forecastData: payload,
+      };
+    case FETCH_FORECAST_FAIL:
+      return {
+        ...state,
+        isForecastLoading: false,
+        isForecastError: true,
       };
     default:
       throw new Error();

@@ -1,7 +1,19 @@
-import {FAIL, FETCH, SET_OPTIONS, CITY, START, SUCCESS} from '../../constants';
+import {
+  FAIL,
+  FETCH,
+  FORECAST,
+  CURRENT,
+  SET_OPTIONS,
+  CITY,
+  START,
+  SUCCESS,
+} from '../../constants';
 
-export const FETCH_START = `${FETCH}${START}`;
-export const FETCH_SUCCESS = `${FETCH}${SUCCESS}`;
-export const FETCH_FAIL = `${FETCH}${FAIL}`;
-export const FETCH_FAIL_CITY = `${FETCH}${FAIL}${CITY}`;
+export const FETCH_CURRENT_START = `${FETCH}${CURRENT}${START}`;
+export const FETCH_CURRENT_SUCCESS = `${FETCH}${CURRENT}${SUCCESS}`;
+export const FETCH_CURRENT_FAIL = `${FETCH}${CURRENT}${FAIL}`;
 export const FETCH_SET_OPTIONS = `${FETCH}${SET_OPTIONS}`;
+export const FETCH_CURRENT_FAIL_CITY = `${FETCH}${CURRENT}${FAIL}${CITY}`;
+export const FETCH_FORECAST_START = `${FETCH}${FORECAST}${START}`;
+export const FETCH_FORECAST_SUCCESS = `${FETCH}${FORECAST}${SUCCESS}`;
+export const FETCH_FORECAST_FAIL = `${FETCH}${FORECAST}${FAIL}`;

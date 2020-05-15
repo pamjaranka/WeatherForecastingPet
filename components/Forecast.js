@@ -14,7 +14,7 @@ Forecast.propTypes = {
 
 function Forecast(props) {
   const {
-    data,
+    currentData,
     forecast,
   } = props;
 
@@ -27,7 +27,7 @@ function Forecast(props) {
 
   return (
     <View>
-      <ForecastData {...data} />
+      <ForecastData {...currentData} />
       <ForecastPet pet={pet} />
     </View>
   );
