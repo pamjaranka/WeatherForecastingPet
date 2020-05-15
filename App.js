@@ -12,6 +12,7 @@ import {
   SEARCH_MODAL,
   LOADING_SCREEN,
   ERROR_SCREEN,
+  ERROR_CITY_SCREEN,
 } from './constants/screens';
 import HeaderContainer from './components/HeaderContainer';
 import Navigation from './screens/Navigation';
@@ -38,10 +39,13 @@ function App() {
   } = state;
 
   console.log('APP state');
-  console.log(`searchScreenFocused ${searchScreenFocused}`);
   console.log(state);
-  const sendState = ({index, routeNames}) => {
-    setSearchScreenFocused(routeNames[index] === SEARCH_MODAL);
+  console.log(`searchScreenFocused ${searchScreenFocused}`);
+  const sendState = ({index, routes}) => {
+    console.log('sendState');
+    console.log(index);
+    console.log(routes);
+    setSearchScreenFocused(routes[index].name === SEARCH_MODAL);
   };
 
   const onRefreshButtonPress = () => {
@@ -53,7 +57,7 @@ function App() {
 
   const onCloseButtonPress = () => {
     isError || isCityError
-      ? navigateTo(ref, ERROR_SCREEN)
+      ? navigateTo(ref, ERROR_CITY_SCREEN)
       : navigateTo(ref, HOME_SCREEN);
   };
 
@@ -89,6 +93,10 @@ function App() {
     navigateTo(ref, HOME_SCREEN, {...state});
   };
 
+  const goError = () => {
+    navigateTo(ref, ERROR_SCREEN);
+  };
+
   useEffect(() => {
     console.log(`CITY CHANGE ${city}`);
     console.log(state);
@@ -98,8 +106,10 @@ function App() {
       goHome();
     } else if (isCityError) {
       setSearchFormError(true);
+    } else if (isError) {
+      goError();
     }
-  }, [city, isCityError]);
+  }, [city, isCityError, isError]);
 
   return (
     <Container style={styles.container}>
@@ -123,7 +133,7 @@ function App() {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: COLORS.lightGrey,
-  }
+  },
 });
 
 export default App;

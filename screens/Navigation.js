@@ -1,14 +1,16 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {
   HOME_SCREEN,
   SEARCH_MODAL,
   LOADING_SCREEN,
+  ERROR_CITY_SCREEN,
   ERROR_SCREEN,
 } from '../constants/screens';
 import HomeScreen from './HomeScreen';
 import SearchScreen from './SearchScreen';
 import LoadingScreen from './LoadingScreen';
 import ErrorScreen from './ErrorScreen';
+import ErrorCityScreen from './ErrorCityScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {forecastPropTypes} from '../components/ContentContainer';
@@ -87,6 +89,13 @@ function Navigation(props) {
         <Stack.Screen
           name={ERROR_SCREEN}
           component={ErrorScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={ERROR_CITY_SCREEN}
+          component={ErrorCityScreen}
           options={{
             headerShown: false,
           }}
