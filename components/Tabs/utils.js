@@ -13,7 +13,7 @@ export const tabLabels = forecastData => {
       minutes: '00',
     };
     if (!tomorrow && day !== dayToday && month !== monthToday) {
-      label.day = `${MONTH_SHORT_NAMES[value.dt.month]} ${value.dt.day}`;
+      label.day = `${MONTH_SHORT_NAMES[value.dt.month - 1]} ${value.dt.day}`;
       tomorrow = true;
     }
     return label;
