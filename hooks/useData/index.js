@@ -86,14 +86,36 @@ export default () => {
 
   const getData = d => {
     return {
-      main: d[0].weather[0].main,
-      description: d[0].weather[0].description,
-      wind: d[0].wind,
-      clouds: d[0].clouds.all,
-      rain: d[0].rain,
-      snow: d[0].snow,
-      ...d[0].main,
+      main: d.weather[0].main,
+      description: d.weather[0].description,
+      wind: d.wind,
+      clouds: d.clouds.all,
+      rain: d.rain || null,
+      snow: d.snow || null,
+      ...d.main,
     };
+  };
+
+  const getForecastData = forecastData => {
+    console.log('getForecastData');
+    let result = [];
+    // if (!forecastData) return null;
+    forecastData.forEach((value, index) => {
+      const date = new Date(value.dt * 1000);
+
+      result[index] = {
+        dt: {
+          day: date.getDate(),
+          month: date.getMonth() + 1,
+          hours: date.getHours(),
+          minutes: date.getMinutes(),
+        },
+        dt_txt: value.dt_txt,
+        data: getData(value),
+      };
+    });
+
+    return result;
   };
 
   // console.log('!!!!!!');
@@ -104,14 +126,15 @@ export default () => {
     console.log(data);
     dispatch(setDataStart());
 
-    if (data && data.currentData && data.currentData[0]) {
-      const currentData = getData(data.currentData);
+    if (data && data.currentData && data.currentData[0] && data.forecastData) {
+      const currentData = getData(data.currentData[0]);
+      const forecastData = getForecastData(data.forecastData);
       const forecast = setForecast(currentData);
       dispatch(
         setDataSuccess({
           city: data.currentData[0].name,
           currentData: currentData,
-          forecastData: data.forecastData,
+          forecastData: forecastData,
           forecast: forecast,
         }),
       );
@@ -120,7 +143,30 @@ export default () => {
     } else if (stateGeolocation.isError || data.isError) {
       dispatch(setDataFail());
     }
-  }, [data.currentData, data.isError, stateGeolocation.isError]);
+  }, [data.currentData, data.isCurrentError, data.forecastData, data.isForecastError, stateGeolocation.isError]);
+
+  // useEffect(() => {
+  //   console.log('useData WILL CHANGE');
+  //   console.log(data);
+  //   dispatch(setDataStart());
+  //
+  //   if (data && data.currentData && data.currentData[0]) {
+  //     const currentData = getData(data.currentData);
+  //     const forecast = setForecast(currentData);
+  //     dispatch(
+  //       setDataSuccess({
+  //         city: data.currentData[0].name,
+  //         currentData: currentData,
+  //         forecastData: data.forecastData,
+  //         forecast: forecast,
+  //       }),
+  //     );
+  //   } else if (data.searchCityError) {
+  //     dispatch(setCityFail());
+  //   } else if (stateGeolocation.isError || data.isError) {
+  //     dispatch(setDataFail());
+  //   }
+  // }, [data.forecastData, data.isForecastError]);
 
   return {state, changeCity, updateGeolocation};
 };

@@ -40,7 +40,6 @@ function App() {
 
   console.log('APP state');
   console.log(state);
-  console.log(`searchScreenFocused ${searchScreenFocused}`);
   const sendState = ({index, routes}) => {
     setSearchScreenFocused(routes[index].name === SEARCH_MODAL);
   };

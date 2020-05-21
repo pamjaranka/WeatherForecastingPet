@@ -1,9 +1,11 @@
 import React from 'react';
-import {View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import LocationData from './LocationData';
 import Forecast from './Forecast';
+import ForecastData, {forecastDataPropTypes} from './ForecastData';
+import Tabs from './Tabs';
 import PropTypes from 'prop-types';
-import {forecastDataPropTypes} from './ForecastData';
+import {COLORS, CONTAINER_STYLES, HOME_CONTAINER_STYLES, PADDING} from '../styles/base';
 
 export const forecastPropTypes = {
   temp: PropTypes.string.isRequired,
@@ -24,6 +26,7 @@ function ContentContainer(props) {
   const {
     city,
     currentData,
+    forecastData,
     forecast,
   } = props;
   console.log('ContentContainer');
@@ -33,12 +36,28 @@ function ContentContainer(props) {
       <LocationData
         locationCity={city}
       />
-      <Forecast
-        currentData={currentData}
-        forecast={forecast}
-      />
+      <View style={styles.tabs}>
+        <Tabs
+          forecastData={forecastData}
+          activeColor={COLORS.blue}
+          backgroundColor={COLORS.lightGrey}
+        />
+      </View>
+      <ForecastData {...currentData} />
+      <View style={styles.container}>
+        <Forecast forecast={forecast} />
+      </View>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    ...CONTAINER_STYLES,
+  },
+  tabs: {
+    ...HOME_CONTAINER_STYLES,
+  },
+});
 
 export default ContentContainer;

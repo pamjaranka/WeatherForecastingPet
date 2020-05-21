@@ -53,7 +53,7 @@ export default () => {
   };
 
   currentUrl = addOptionsToUrl(currentUrl, 10);
-  forecastUrl = addOptionsToUrl(forecastUrl, 18);
+  forecastUrl = addOptionsToUrl(forecastUrl, 6);
 
   console.log(currentUrl);
   console.log(forecastUrl);
@@ -83,7 +83,7 @@ export default () => {
           dispatchData(fetchCurrentFail());
         }
       };
-      fetchCurrentData();
+
 
       dispatchData(fetchForecastStart());
       const fetchForecastData = async () => {
@@ -103,7 +103,8 @@ export default () => {
           dispatchData(fetchForecastFail());
         }
       };
-      fetchForecastData();
+
+      fetchCurrentData().then(fetchForecastData());
     }
     return () => {
       didCancel = true;
