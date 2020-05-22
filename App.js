@@ -28,7 +28,7 @@ import {StyleSheet} from 'react-native';
 function App() {
   console.log('APP');
   const ref = useRef(null);
-  const {state, changeCity, updateGeolocation} = useData();
+  const {state, changeCity, update} = useData();
   const [searchScreenFocused, setSearchScreenFocused] = useState(false);
   const {
     isError,
@@ -43,9 +43,10 @@ function App() {
   };
 
   const onRefreshButtonPress = () => {
-    updateGeolocation();
+    update();
     navigateTo(ref, HOME_SCREEN, {
       isLoading: true,
+      city: null,
     });
   };
 

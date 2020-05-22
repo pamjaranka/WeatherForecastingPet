@@ -3,6 +3,7 @@ import {
   SET_DATA_FAIL,
   SET_DATA_START,
   SET_DATA_SUCCESS,
+  SET_CITY_NEW,
 } from './actionTypes';
 
 export default (state, {type, payload}) => {
@@ -41,6 +42,12 @@ export default (state, {type, payload}) => {
         isLoading: false,
         isCityError: true,
         isError: true,
+        city: null,
+        forecastData: null,
+      };
+    case SET_CITY_NEW:
+      return {
+        ...state,
         city: null,
         forecastData: null,
       };

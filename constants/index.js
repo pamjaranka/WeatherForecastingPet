@@ -6,6 +6,7 @@ export const SET_OPTIONS = '_SET_OPTIONS';
 export const CITY = '_CITY';
 export const CURRENT = '_CURRENT';
 export const FORECAST = '_FORECAST';
+export const NEW = '_NEW';
 
 export const FETCH = 'FETCH';
 export const GEOLOCATION = 'GEOLOCATION';

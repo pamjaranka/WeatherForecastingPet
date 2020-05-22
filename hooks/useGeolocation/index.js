@@ -4,7 +4,7 @@ import {
   geolocationFail,
   geolocationUpdate,
   geolocationStart,
-  geolocationSuccess
+  geolocationSuccess,
 } from './actionCreators';
 import Geolocation from '@react-native-community/geolocation';
 
@@ -14,19 +14,21 @@ export default callback => {
     {
       isLoading: false,
       isError: false,
-      coors: null,
-      updateGeolocation: true,
+      lat: null,
+      lon: null,
     },
   );
 
   const updateGeolocation = () => {
-    dispatchGeolocation(geolocationUpdate(true));
+    dispatchGeolocation(geolocationUpdate());
   };
 
   useEffect(() => {
     console.log('useGeolocation useEffect');
-    // console.log(stateGeolocation);
+    console.log(stateGeolocation);
     let watchId = null;
+    // let didCancel = false;
+
     async function fetchGeolocation() {
       dispatchGeolocation(geolocationStart());
 
@@ -54,10 +56,12 @@ export default callback => {
         {maximumAge: 0},
       );
     }
+
     fetchGeolocation();
 
     return () => Geolocation.clearWatch(watchId);
-  }, [stateGeolocation.updateGeolocation]);
+
+  }, [stateGeolocation.lat, stateGeolocation.lon]);
 
   return [stateGeolocation, updateGeolocation];
 };

@@ -8,6 +8,7 @@ import {
   setDataFail,
   setDataStart,
   setDataSuccess,
+  setCityNew,
 } from './actionCreators';
 import {getForecast} from '../../utils/forecast';
 
@@ -23,7 +24,17 @@ export default () => {
   console.log(state);
 
   const setCoorsOptions = () => {
-    dispatchData(fetchSetOptions(stateGeolocation.coors));
+    dispatchData(
+      fetchSetOptions({
+        lat: stateGeolocation.lat,
+        lon: stateGeolocation.lon,
+      }),
+    );
+  };
+
+  const update = () => {
+    updateGeolocation();
+    dispatch(setCityNew());
   };
 
   const [stateGeolocation, updateGeolocation] = useGeolocation(setCoorsOptions);
@@ -85,5 +96,5 @@ export default () => {
     }
   }, [data.currentData, data.isCurrentError, data.forecastData, data.isForecastError, stateGeolocation.isError]);
 
-  return {state, changeCity, updateGeolocation};
+  return {state, changeCity, update};
 };

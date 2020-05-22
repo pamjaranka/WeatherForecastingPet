@@ -14,9 +14,8 @@ LocationSearchForm.propTypes = {
 function LocationSearchForm(props) {
   const {onSearchFormSubmit, isCityLoading, isCityError} = props;
   const [query, setQuery] = useState('');
-
-  console.log('LocationSearchForm');
-  console.log(props);
+  // console.log('LocationSearchForm');
+  // console.log(props);
   return (
     <Form>
       <Item error={isCityError} floatingLabel style={styles.input}>

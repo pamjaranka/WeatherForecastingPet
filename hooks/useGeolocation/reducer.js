@@ -20,8 +20,8 @@ export default (state, {type, payload}) => {
         ...state,
         isLoading: false,
         isError: false,
-        coors: payload,
-        updateGeolocation: false,
+        lat: payload.lat,
+        lon: payload.lon,
       };
     case GEOLOCATION_FAIL:
       return {
@@ -32,7 +32,8 @@ export default (state, {type, payload}) => {
     case GEOLOCATION_UPDATE:
       return {
         ...state,
-        updateGeolocation: payload,
+        lat: null,
+        lon: null,
       };
     default:
       throw new Error();

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {ScrollView, StyleSheet, Text} from 'react-native';
 import {Content} from 'native-base';
 import ContentContainer from '../components/ContentContainer';
@@ -9,7 +9,7 @@ import useWeatherPhrases from '../hooks/useWeatherPhrases';
 
 function HomeScreen({route}) {
   console.log('HomeScreen');
-  // console.log(route.params);
+  console.log(route.params);
   const {
     isError,
     isLoading,
@@ -28,9 +28,13 @@ function HomeScreen({route}) {
   });
   console.log(`weatherPhrase ${weatherPhrase}`);
 
+  useEffect(() => {
+    setActiveForecastIndex(0);
+  }, [city]);
+
   return (
     <>
-      {isLoading ? (
+      {isLoading || !forecastData ? (
         <LoadingHome />
       ) : isError ? (
         <Text>Something went wrong...</Text>

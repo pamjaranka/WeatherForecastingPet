@@ -55,10 +55,6 @@ export default () => {
   currentUrl = addOptionsToUrl(currentUrl, 10);
   forecastUrl = addOptionsToUrl(forecastUrl, 6);
 
-  console.log(currentUrl);
-  console.log(forecastUrl);
-  console.log(data.options);
-
   useEffect(() => {
     let didCancel = false;
     console.log(`did cancel ${didCancel}`);
@@ -67,8 +63,8 @@ export default () => {
       const fetchCurrentData = async () => {
         try {
           const result = await axios(currentUrl);
-          console.log('try!!!');
-          console.log(result);
+          // console.log('try!!!');
+          // console.log(result);
           if (result && result.data) {
             if (result.data.list.length > 0) {
               dispatchData(fetchCurrentSuccess(result.data.list));
@@ -83,7 +79,6 @@ export default () => {
           dispatchData(fetchCurrentFail());
         }
       };
-
 
       dispatchData(fetchForecastStart());
       const fetchForecastData = async () => {
@@ -109,7 +104,7 @@ export default () => {
     return () => {
       didCancel = true;
     };
-  }, [data.options/*, url*/]);
+  }, [data.options]);
 
   return [data, dispatchData, changeCity];
 };
