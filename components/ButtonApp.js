@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, Icon} from 'native-base';
-import {COLORS, ICON_STYLES} from '../styles/base';
+import {ICON_STYLES} from '../styles/base';
 import {StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 

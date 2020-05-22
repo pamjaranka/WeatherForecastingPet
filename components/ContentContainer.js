@@ -1,8 +1,8 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import LocationData from './LocationData';
-import ForecastData from './ForecastData';
 import Tabs from './Tabs';
+import Forecast from './Forecast';
 import PropTypes from 'prop-types';
 import {
   COLORS,
@@ -10,19 +10,14 @@ import {
   HOME_CONTAINER_STYLES,
   PADDING,
 } from '../styles/base';
-import ForecastPet from './ForecastPet';
-import {forecastPropTypes} from '../utils/forecast';
-import {forecastDataPropTypes} from './ForecastData';
+import {forecastDataPropTypes} from './Forecast';
 
 ContentContainer.propTypes = {
   city: PropTypes.string.isRequired,
   activeForecastIndex: PropTypes.number.isRequired,
   onTabPress: PropTypes.func.isRequired,
   forecastData: PropTypes.PropTypes.arrayOf(
-    PropTypes.shape({
-      ...forecastDataPropTypes,
-      params: PropTypes.shape(forecastPropTypes).isRequired,
-    }),
+    PropTypes.shape(forecastDataPropTypes),
   ).isRequired,
 };
 
@@ -53,10 +48,7 @@ function ContentContainer(props) {
           onTabPress={onTabPress}
         />
       </View>
-      <ForecastData activeForecastData={activeForecastData} />
-      <View style={styles.container}>
-        <ForecastPet forecast={activeForecastData.params} />
-      </View>
+      <Forecast activeForecastData={activeForecastData} />
     </View>
   );
 }

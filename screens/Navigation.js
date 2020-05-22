@@ -13,8 +13,7 @@ import ErrorScreen from './ErrorScreen';
 import ErrorCityScreen from './ErrorCityScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {forecastPropTypes} from '../components/ContentContainer';
-import {forecastDataPropTypes} from '../components/ForecastData';
+import {forecastDataPropTypes} from '../components/Forecast';
 import PropTypes from 'prop-types';
 
 Navigation.propTypes = {
@@ -33,9 +32,10 @@ Navigation.propTypes = {
     isError: PropTypes.bool.isRequired,
     isLoading: PropTypes.bool.isRequired,
     isCityError: PropTypes.bool.isRequired,
-    data: PropTypes.shape(forecastDataPropTypes),
+    forecastData: PropTypes.arrayOf(
+      PropTypes.shape(forecastDataPropTypes),
+    ),
     city: PropTypes.string,
-    forecast: PropTypes.shape(forecastPropTypes),
   }),
 };
 

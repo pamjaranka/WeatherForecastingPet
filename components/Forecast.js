@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, Text, View} from 'react-native';
-import {FONTS, COLORS, PADDING, HOME_CONTAINER_STYLES} from '../styles/base';
+import {FONTS, COLORS, PADDING, HOME_CONTAINER_STYLES, CONTAINER_STYLES} from '../styles/base';
+import ForecastPet from './ForecastPet';
+import {forecastPropTypes} from '../utils/forecast';
 
 export const forecastDataPropTypes = {
   dt: PropTypes.number.isRequired,
@@ -20,13 +22,14 @@ export const forecastDataPropTypes = {
     speed: PropTypes.number,
     deg: PropTypes.number,
   }).isRequired,
+  params: PropTypes.shape(forecastPropTypes).isRequired,
 };
 
-ForecastData.propTypes = {
+Forecast.propTypes = {
   activeForecastData: PropTypes.shape(forecastDataPropTypes).isRequired,
 };
 
-function ForecastData(props) {
+function Forecast(props) {
   const {
     activeForecastData: {
       temp,
@@ -39,6 +42,7 @@ function ForecastData(props) {
       description,
       wind,
       clouds,
+      params,
     },
   } = props;
 
@@ -60,12 +64,23 @@ function ForecastData(props) {
             <Text style={styles.desc}>({description})</Text>
           </View>
           <View style={styles.column}>
-            <Text style={styles.infoMain}>Minimum</Text>
-            <Text style={styles.infoMain}>{Math.round(temp_min)}˚C</Text>
-            <Text style={styles.infoMain}>Maximum</Text>
-            <Text style={styles.infoMain}>{Math.round(temp_max)}˚C</Text>
+            {/*<Text style={styles.infoMainBig}>{Math.round(temp_min)}˚C / {Math.round(temp_max)}˚C</Text>*/}
+            {/*<Text style={styles.desc}>(min / max)</Text>*/}
+            <View style={styles.row}>
+              <View style={styles.column}>
+                <Text style={styles.infoMainBig}>{Math.round(temp_min)}˚C</Text>
+                <Text style={styles.desc}>(min)</Text>
+              </View>
+              <View style={styles.column}>
+                <Text style={styles.infoMainBig}>{Math.round(temp_max)}˚C</Text>
+                <Text style={styles.desc}>(max)</Text>
+              </View>
+            </View>
           </View>
         </View>
+      </View>
+      <View style={styles.image}>
+        <ForecastPet forecast={params} />
       </View>
       <View style={styles.additional}>
         <Text style={styles.subtitle}>Additional Info</Text>
@@ -140,7 +155,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-start',
     marginBottom: PADDING.xs,
-    marginTop: PADDING.lg,
+    marginTop: PADDING.sm,
   },
   label: {
     color: COLORS.darkGrey,
@@ -167,10 +182,13 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.bold,
     fontSize: FONTS.xl,
   },
+  image: {
+    ...CONTAINER_STYLES,
+    paddingTop: 0,
+  },
   additional: {
-    ...HOME_CONTAINER_STYLES,
-    backgroundColor: COLORS.white,
-    // marginTop: PADDING.lg,
+    ...CONTAINER_STYLES,
+    paddingBottom: PADDING.md,
   },
   subtitle: {
     fontFamily: FONTS.bold,
@@ -179,4 +197,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ForecastData;
+export default Forecast;
