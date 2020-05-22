@@ -21,7 +21,6 @@ import useData from './hooks/useData';
 import CloseButton from './components/CloseButton';
 import SearchButton from './components/SearchButton';
 import RefreshButton from './components/RefreshButton';
-// import useTimeoutWait from './hooks/useTimeoutWait';
 import {navigateTo, setParamsTo} from './utils/navigate';
 import {COLORS} from './styles/base';
 import {StyleSheet} from 'react-native';
@@ -31,7 +30,6 @@ function App() {
   const ref = useRef(null);
   const {state, changeCity, updateGeolocation} = useData();
   const [searchScreenFocused, setSearchScreenFocused] = useState(false);
-  // const wait = useTimeoutWait({delay: 3000});
   const {
     isError,
     isCityError,
@@ -61,12 +59,6 @@ function App() {
   const refreshButton = <RefreshButton onPress={onRefreshButtonPress} />;
   const searchButton = <SearchButton onPress={() => navigateTo(ref, SEARCH_MODAL)}/>;
   const headerButtonSecond = searchScreenFocused ? closeButton : searchButton;
-
-  // const getRouteName = () => {
-  //   return searchScreenFocused
-  //     ? SEARCH_MODAL
-  //     : HOME_SCREEN;
-  // };
 
   const onSearchFormSubmit = query => {
     setSearchFormLoading(true);
@@ -115,7 +107,6 @@ function App() {
       <Navigation
         refObj={ref}
         onStateChange={sendState}
-        // initialRouteName={getRouteName()}
         initialRouteName={LOADING_SCREEN}
         useDataState={state}
         refreshButton={refreshButton}

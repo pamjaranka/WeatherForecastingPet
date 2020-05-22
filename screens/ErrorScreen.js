@@ -9,7 +9,7 @@ function ErrorScreen({route}) {
   return (
     <Content style={styles.container}>
       <Text style={styles.text}>Something went wrong...</Text>
-      </Content>
+    </Content>
   );
 }
 

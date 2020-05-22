@@ -10,10 +10,10 @@ function Item(props) {
     onPress,
     backgroundColor,
     activeColor,
+    index,
   } = props;
+  // console.log(`this is tab with index ${index}`);
 
-  // const [active, setActive] = useState(isActive);
-  // console.log(`${index} is active ${isActive}`);
   return (
     <View style={styles.container}>
       <Text style={styles.date}>{day ? day : ''}</Text>

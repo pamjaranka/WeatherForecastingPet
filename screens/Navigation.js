@@ -30,10 +30,9 @@ Navigation.propTypes = {
     ERROR_SCREEN,
   ]).isRequired,
   useDataState: PropTypes.shape({
-    isError: PropTypes.bool,
-    isLoading: PropTypes.bool,
-    isLoaded: PropTypes.bool,
-    isCityError: PropTypes.bool,
+    isError: PropTypes.bool.isRequired,
+    isLoading: PropTypes.bool.isRequired,
+    isCityError: PropTypes.bool.isRequired,
     data: PropTypes.shape(forecastDataPropTypes),
     city: PropTypes.string,
     forecast: PropTypes.shape(forecastPropTypes),
@@ -43,7 +42,6 @@ Navigation.propTypes = {
 const Stack = createStackNavigator();
 
 function Navigation(props) {
-  console.log('Navigation');
   const {
     refObj,
     onStateChange,

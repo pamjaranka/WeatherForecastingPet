@@ -12,7 +12,6 @@ export default (state, {type, payload}) => {
     case SET_DATA_START:
       return {
         ...state,
-        currentData: null,
         forecastData: null,
         isLoading: true,
         isCityError: false,
@@ -25,9 +24,7 @@ export default (state, {type, payload}) => {
         isCityError: false,
         isError: false,
         city: payload.city,
-        currentData: payload.currentData,
         forecastData: payload.forecastData,
-        forecast: payload.forecast,
       };
     case SET_DATA_FAIL:
       return {
@@ -37,8 +34,6 @@ export default (state, {type, payload}) => {
         isError: true,
         city: null,
         forecastData: null,
-        currentData: null,
-        forecast: null,
       };
     case SET_CITY_FAIL:
       return {
@@ -47,9 +42,7 @@ export default (state, {type, payload}) => {
         isCityError: true,
         isError: true,
         city: null,
-        currentData: null,
         forecastData: null,
-        forecast: null,
       };
     default:
       throw new Error();

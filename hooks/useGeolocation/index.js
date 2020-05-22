@@ -23,9 +23,6 @@ export default callback => {
     dispatchGeolocation(geolocationUpdate(true));
   };
 
-  console.log('useGeolocation (stateGeolocation)');
-  // console.log(stateGeolocation);
-
   useEffect(() => {
     console.log('useGeolocation useEffect');
     // console.log(stateGeolocation);

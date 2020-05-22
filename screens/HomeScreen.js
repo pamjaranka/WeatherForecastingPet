@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {ScrollView, StyleSheet, Text} from 'react-native';
 import {Content} from 'native-base';
 import ContentContainer from '../components/ContentContainer';
@@ -9,17 +9,23 @@ import useWeatherPhrases from '../hooks/useWeatherPhrases';
 
 function HomeScreen({route}) {
   console.log('HomeScreen');
-  console.log(route.params);
+  // console.log(route.params);
   const {
     isError,
     isLoading,
-    currentData,
     forecastData,
     city,
-    forecast,
   } = route.params;
 
-  const weatherPhrase = useWeatherPhrases('Good boy!', forecast);
+  const [activeForecastIndex, setActiveForecastIndex] = useState(0);
+
+  const onTabPress = index => {
+    return () => setActiveForecastIndex(index);
+  };
+  const weatherPhrase = useWeatherPhrases({
+    init: 'Good boy!',
+    params: forecastData[activeForecastIndex].params,
+  });
   console.log(`weatherPhrase ${weatherPhrase}`);
 
   return (
@@ -34,9 +40,9 @@ function HomeScreen({route}) {
             <ScrollView>
               <ContentContainer
                 city={city}
-                currentData={currentData}
+                activeForecastIndex={activeForecastIndex}
+                onTabPress={onTabPress}
                 forecastData={forecastData}
-                forecast={forecast}
               />
             </ScrollView>
           </Content>

@@ -3,26 +3,22 @@ import {MONTH_SHORT_NAMES} from '../../constants/forecast';
 export const tabLabels = forecastData => {
   const dateInfo = new Date();
   const dayToday = dateInfo.getDate();
-  const monthToday = dateInfo.getMonth();
   let tomorrow = false;
 
-  const result = forecastData.map(value => {
-    const {dt: {day, month, hours}} = value;
+  return forecastData.map((value, index) => {
+    const date = new Date(value.dt * 1000);
+    const hours = date.getHours();
+    const day = date.getDate();
+    const month = date.getMonth();
+
     const label = {
-      hours: `${hours}`,
-      minutes: '00',
+      hours: index === 0 ? 'now' : hours,
+      minutes: index === 0 ? '' : '00',
     };
-    if (!tomorrow && day !== dayToday && month !== monthToday) {
-      label.day = `${MONTH_SHORT_NAMES[value.dt.month - 1]} ${value.dt.day}`;
+    if (!tomorrow && day !== dayToday) {
+      label.day = `${MONTH_SHORT_NAMES[month]} ${day}`;
       tomorrow = true;
     }
     return label;
   });
-
-  return [
-    {
-      hours: 'now',
-    },
-    ...result,
-  ];
 };

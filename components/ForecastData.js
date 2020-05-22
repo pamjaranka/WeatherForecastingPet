@@ -4,6 +4,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import {FONTS, COLORS, PADDING, HOME_CONTAINER_STYLES} from '../styles/base';
 
 export const forecastDataPropTypes = {
+  dt: PropTypes.number.isRequired,
   temp: PropTypes.number.isRequired,
   temp_max: PropTypes.number.isRequired,
   temp_min: PropTypes.number.isRequired,
@@ -21,20 +22,24 @@ export const forecastDataPropTypes = {
   }).isRequired,
 };
 
-ForecastData.propTypes = forecastDataPropTypes;
+ForecastData.propTypes = {
+  activeForecastData: PropTypes.shape(forecastDataPropTypes).isRequired,
+};
 
 function ForecastData(props) {
   const {
-    temp,
-    temp_max,
-    temp_min,
-    feels_like,
-    humidity,
-    pressure,
-    main,
-    description,
-    wind,
-    clouds,
+    activeForecastData: {
+      temp,
+      temp_max,
+      temp_min,
+      feels_like,
+      humidity,
+      pressure,
+      main,
+      description,
+      wind,
+      clouds,
+    },
   } = props;
 
   return (

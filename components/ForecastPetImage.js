@@ -9,7 +9,7 @@ ForecastPetImage.propTypes = {
 
 function ForecastPetImage(props) {
   const {pet} = props;
-  console.log('ForecastPetImage');
+  console.log('ForecastPetImage ?');
   console.log(pet);
 
   return (

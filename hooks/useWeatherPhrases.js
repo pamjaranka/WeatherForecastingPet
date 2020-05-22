@@ -7,22 +7,25 @@ import {
   WIND,
 } from '../constants/forecast';
 import {PHRASE, WEATHER_PHRASES} from '../constants/weatherPhrases';
-import {forecastDataPropTypes} from '../components/ContentContainer';
+import {forecastPropTypes} from '../utils/forecast';
+import PropTypes from 'prop-types';
 
-useWeatherPhrases.propTypes = forecastDataPropTypes;
+useWeatherPhrases.propTypes = {
+  init: PropTypes.string,
+  params: PropTypes.shape(forecastPropTypes).isRequired,
+};
 
-function useWeatherPhrases(initPhrase, forecast) {
-  const [weatherPhrase, setWeatherPhrase] = useState(initPhrase || 'Welcome');
-  // const [weatherPhrase, setWeatherPhrase] = useState('');
-  // console.log('useWeatherPhrases');
+function useWeatherPhrases(props) {
+  const {init, params} = props;
+  const [weatherPhrase, setWeatherPhrase] = useState(init || 'Welcome');
   const getRandomInt = max => {
     return Math.floor(Math.random() * Math.floor(max));
   };
 
   const pickWeatherPhrase = () => {
-    if (!forecast) return initPhrase;
+    if (!params) return init;
 
-    const {temp, isSunny, isRain, isSnow, isWind, isClouds} = forecast;
+    const {temp, isSunny, isRain, isSnow, isWind, isClouds} = params;
 
     let phraseKey = PHRASE;
 
@@ -39,15 +42,14 @@ function useWeatherPhrases(initPhrase, forecast) {
     } else if (temp) {
       phraseKey += temp;
     }
-    // console.log(phraseKey);
-    // console.log(WEATHER_PHRASES[phraseKey]);
+
     return WEATHER_PHRASES[phraseKey][getRandomInt(WEATHER_PHRASES[phraseKey].length)];
   };
 
   useEffect(() => {
-    console.log('weather phrase WILL change');
+    // console.log('weather phrase WILL change');
     setWeatherPhrase(pickWeatherPhrase());
-  }, [forecast]);
+  }, [params]);
 
   return weatherPhrase;
 }

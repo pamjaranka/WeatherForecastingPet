@@ -1,39 +1,46 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import LocationData from './LocationData';
-import Forecast from './Forecast';
-import ForecastData, {forecastDataPropTypes} from './ForecastData';
+import ForecastData from './ForecastData';
 import Tabs from './Tabs';
 import PropTypes from 'prop-types';
-import {COLORS, CONTAINER_STYLES, HOME_CONTAINER_STYLES, PADDING} from '../styles/base';
-
-export const forecastPropTypes = {
-  temp: PropTypes.string.isRequired,
-  isClouds: PropTypes.bool.isRequired,
-  isSunny: PropTypes.bool.isRequired,
-  isRain: PropTypes.bool.isRequired,
-  isSnow: PropTypes.bool.isRequired,
-  isWind: PropTypes.bool.isRequired,
-};
+import {
+  COLORS,
+  CONTAINER_STYLES,
+  HOME_CONTAINER_STYLES,
+} from '../styles/base';
+import ForecastPet from './ForecastPet';
+import {forecastPropTypes} from '../utils/forecast';
+import {forecastDataPropTypes} from './ForecastData';
 
 ContentContainer.propTypes = {
   city: PropTypes.string.isRequired,
-  currentData: PropTypes.shape(forecastDataPropTypes).isRequired,
-  forecast: PropTypes.shape(forecastPropTypes).isRequired,
+  activeForecastIndex: PropTypes.number.isRequired,
+  onTabPress: PropTypes.func.isRequired,
+  forecastData: PropTypes.PropTypes.arrayOf(
+    PropTypes.shape({
+      ...forecastDataPropTypes,
+      params: PropTypes.shape(forecastPropTypes).isRequired,
+    }),
+  ).isRequired,
 };
 
 function ContentContainer(props) {
   const {
     city,
-    currentData,
     forecastData,
-    forecast,
+    activeForecastIndex,
+    onTabPress,
   } = props;
+
+  const activeForecastData = forecastData[activeForecastIndex] || forecastData[0];
+
   console.log('ContentContainer');
   console.log(props);
   return (
     <View>
       <LocationData
+        date={activeForecastData.dt}
         locationCity={city}
       />
       <View style={styles.tabs}>
@@ -41,11 +48,13 @@ function ContentContainer(props) {
           forecastData={forecastData}
           activeColor={COLORS.blue}
           backgroundColor={COLORS.lightGrey}
+          activeTab={activeForecastIndex}
+          onTabPress={onTabPress}
         />
       </View>
-      <ForecastData {...currentData} />
+      <ForecastData activeForecastData={activeForecastData} />
       <View style={styles.container}>
-        <Forecast forecast={forecast} />
+        <ForecastPet forecast={activeForecastData.params} />
       </View>
     </View>
   );

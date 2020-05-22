@@ -1,23 +1,24 @@
 import React from 'react';
-import {Text, View, Button, StyleSheet} from 'react-native';
+import {Text, View, StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 import {FONTS, PADDING, COLORS, HOME_CONTAINER_STYLES} from '../styles/base';
 import {DAY_NAMES, MONTH_NAMES} from '../constants/forecast';
 
 LocationData.propTypes = {
   locationCity: PropTypes.string.isRequired,
+  date: PropTypes.number.isRequired,
 };
 
 function LocationData(props) {
-  const {locationCity} = props;
-  console.log('LocationData')
-  const date = new Date();
-
+  const {locationCity, date} = props;
+  // console.log('LocationData');
+  const dateObj = new Date(date * 1000);
+  // console.log(date);
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{locationCity}</Text>
       <Text style={styles.subtitle}>(the city)</Text>
-      <Text style={styles.date}>{DAY_NAMES[date.getDay()]}, {MONTH_NAMES[date.getMonth()]} {date.getDate()}</Text>
+      <Text style={styles.date}>{DAY_NAMES[dateObj.getDay()]}, {MONTH_NAMES[dateObj.getMonth()]} {dateObj.getDate()}</Text>
     </View>
   );
 }
