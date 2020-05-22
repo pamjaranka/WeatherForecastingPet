@@ -10,9 +10,7 @@ function Item(props) {
     onPress,
     backgroundColor,
     activeColor,
-    index,
   } = props;
-  // console.log(`this is tab with index ${index}`);
 
   return (
     <View style={styles.container}>
@@ -22,14 +20,18 @@ function Item(props) {
         style={styles.button}
         onPress={onPress}>
         <View style={styles.time}>
-          <Text style={styles.hours}>{hours}</Text>
-          <Text style={styles.minutes}>{minutes}</Text>
+          <Text style={isActive ? styles.hoursActive : styles.hours}>
+            {hours}
+          </Text>
+          <Text style={isActive ? styles.minutesActive : styles.minutes}>
+            {minutes}
+          </Text>
         </View>
       </Button>
       <View style={{
           ...styles.pointer,
           backgroundColor: isActive ? activeColor : backgroundColor}}/>
-    </View>
+       </View>
   );
 }
 
@@ -48,12 +50,15 @@ const styles = StyleSheet.create({
   },
   pointer: {
     height: 3,
+    marginLeft: PADDING.xs,
+    marginRight: PADDING.xs,
   },
   date: {
     color: COLORS.grey,
     alignSelf: 'flex-start',
     fontFamily: FONTS.primary,
-    fontSize: FONTS.md,
+    fontSize: FONTS.sm,
+    paddingLeft: PADDING.xs,
     marginTop: -PADDING.sm,
     marginBottom: PADDING.xs,
     height: 20,
@@ -66,8 +71,16 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.primary,
     fontSize: FONTS.md,
   },
+  hoursActive: {
+    fontFamily: FONTS.bold,
+    fontSize: FONTS.md,
+  },
   minutes: {
     fontFamily: FONTS.primary,
+    fontSize: FONTS.xs,
+  },
+  minutesActive: {
+    fontFamily: FONTS.bold,
     fontSize: FONTS.xs,
   },
 });

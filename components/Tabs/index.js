@@ -35,7 +35,6 @@ function Tabs(props) {
           onPress={onTabPress(i)}
           backgroundColor={backgroundColor}
           activeColor={activeColor}
-          index={i}
         />
       );
     });

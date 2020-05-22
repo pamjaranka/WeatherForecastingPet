@@ -8,6 +8,7 @@ import {
   COLORS,
   CONTAINER_STYLES,
   HOME_CONTAINER_STYLES,
+  PADDING,
 } from '../styles/base';
 import ForecastPet from './ForecastPet';
 import {forecastPropTypes} from '../utils/forecast';
@@ -66,6 +67,7 @@ const styles = StyleSheet.create({
   },
   tabs: {
     ...HOME_CONTAINER_STYLES,
+    paddingTop: PADDING.md,
   },
 });
 
