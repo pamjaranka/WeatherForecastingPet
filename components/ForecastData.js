@@ -47,10 +47,10 @@ function ForecastData(props) {
       <View style={styles.container}>
         <View style={styles.row}>
           <View style={styles.column}>
-            <Text style={styles.superBig}> {temp}˚C</Text>
+            <Text style={styles.superBig}> {Math.round(temp)}˚C</Text>
           </View>
           <View style={styles.column}>
-            <Text style={styles.infoMainBig}>{feels_like}˚C</Text>
+            <Text style={styles.infoMainBig}>{Math.round(feels_like)}˚C</Text>
             <Text style={styles.desc}>(feels like)</Text>
           </View>
         </View>
@@ -61,9 +61,9 @@ function ForecastData(props) {
           </View>
           <View style={styles.column}>
             <Text style={styles.infoMain}>Minimum</Text>
-            <Text style={styles.infoMain}>{temp_min}˚C</Text>
+            <Text style={styles.infoMain}>{Math.round(temp_min)}˚C</Text>
             <Text style={styles.infoMain}>Maximum</Text>
-            <Text style={styles.infoMain}>{temp_max}˚C</Text>
+            <Text style={styles.infoMain}>{Math.round(temp_max)}˚C</Text>
           </View>
         </View>
       </View>
